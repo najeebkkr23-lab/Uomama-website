@@ -76,12 +76,12 @@ export const Navbar: React.FC<NavbarProps> = ({
       id="main-header"
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled 
-          ? 'bg-[#EEDCA8]/95 backdrop-blur-md shadow-md border-b-2 border-[#D9A62E] py-3' 
-          : 'bg-[#EEDCA8]/90 backdrop-blur-sm border-b-2 border-[#D9A62E]/70 py-3.5'
+          ? 'bg-[#EEDCA8]/95 backdrop-blur-md shadow-md border-b-2 border-[#D9A62E] py-2 sm:py-2.5' 
+          : 'bg-[#EEDCA8]/90 backdrop-blur-sm border-b-2 border-[#D9A62E]/70 py-2.5 sm:py-3'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between gap-2 sm:gap-4">
           
           {/* Official Dynamic Uomama Business Solutions Logo - Clickable to Home */}
           <button 

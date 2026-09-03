@@ -20,7 +20,7 @@ export const Hero: React.FC<HeroProps> = ({
   onExploreServices
 }) => {
   return (
-    <section id="hero" className="relative pt-28 pb-12 lg:pt-32 lg:pb-14 overflow-hidden bg-gradient-to-b from-[#DFAD36] via-[#ECCB77] to-[#D59E27]">
+    <section id="hero" className="relative pt-28 sm:pt-32 lg:pt-36 pb-12 lg:pb-14 overflow-hidden bg-gradient-to-b from-[#DFAD36] via-[#ECCB77] to-[#D59E27]">
       {/* Crystal-clear, static corporate skyline backdrop with enhanced rich colors */}
       <BoomerangVideoBg 
         overlayClassName="bg-gradient-to-b from-[#DFAD36]/50 via-[#ECCB77]/35 to-[#D59E27]/60"

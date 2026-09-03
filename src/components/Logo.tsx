@@ -32,10 +32,10 @@ export const UomamaLogo: React.FC<LogoProps> = ({
     return (
       <div 
         onClick={handleClick}
-        className={`relative flex items-center justify-center shrink-0 ${onClick ? 'cursor-pointer' : ''} ${className || 'h-12 w-12 sm:h-14 sm:w-14'}`}
+        className={`relative flex items-center justify-center shrink-0 ${onClick ? 'cursor-pointer' : ''} ${className || 'h-13 w-13 sm:h-16 sm:w-16 md:h-20 md:w-20'}`}
       >
         {customLogoUrl ? (
-          <div className="w-full h-full p-1 bg-white rounded-xl border-2 border-[#D9A62E] flex items-center justify-center overflow-hidden shadow-xs">
+          <div className="w-full h-full p-1 bg-white rounded-xl sm:rounded-2xl border-2 border-[#D9A62E] flex items-center justify-center overflow-hidden shadow-xs">
             <img 
               src={customLogoUrl} 
               alt={brandName}
@@ -76,10 +76,10 @@ export const UomamaLogo: React.FC<LogoProps> = ({
   return (
     <div 
       onClick={handleClick}
-      className={`inline-flex items-center gap-2 sm:gap-3 ${onClick ? 'cursor-pointer' : ''} ${className}`}
+      className={`inline-flex items-center gap-2 sm:gap-3 md:gap-4 ${onClick ? 'cursor-pointer' : ''} ${className}`}
     >
-      {/* Prominent Logo Icon Badge */}
-      <div className={`h-11 sm:h-14 md:h-16 ${customLogoUrl ? 'w-auto min-w-[2.75rem] max-w-[7rem] sm:max-w-[9rem] px-1.5' : 'w-11 sm:w-14 md:w-16'} rounded-xl sm:rounded-2xl ${isFooter || customLogoUrl ? 'bg-white' : 'bg-[#FAF2DB]'} p-1 sm:p-1.5 border-2 border-[#D9A62E] shadow-sm flex items-center justify-center shrink-0 overflow-hidden`}>
+      {/* Prominent Logo Icon Badge - Enlarged for crystal-clear readability on Mobile, Tablet & Laptop */}
+      <div className={`h-[52px] w-[52px] sm:h-16 sm:w-16 md:h-18 md:w-18 lg:h-20 lg:w-20 ${customLogoUrl ? 'w-auto min-w-[3.25rem] max-w-[8rem] sm:max-w-[10rem] md:max-w-[13rem] lg:max-w-[15rem] px-2' : ''} rounded-xl sm:rounded-2xl ${isFooter || customLogoUrl ? 'bg-white' : 'bg-[#FAF2DB]'} p-1.5 sm:p-2 border-2 border-[#D9A62E] shadow-sm flex items-center justify-center shrink-0 overflow-hidden`}>
         {customLogoUrl ? (
           <img 
             src={customLogoUrl} 
@@ -115,12 +115,12 @@ export const UomamaLogo: React.FC<LogoProps> = ({
         )}
       </div>
       
-      {/* Brand Name & Tagline Box (Clickable to Home) */}
+      {/* Brand Name & Tagline Box (Clickable to Home) - Prominent Typography */}
       <div className="flex flex-col text-left select-none">
-        <div className={`inline-flex items-center px-2.5 sm:px-3.5 md:px-4 py-1 sm:py-1.5 rounded-lg sm:rounded-xl ${isFooter ? 'bg-[#063E38]/95 text-white' : 'bg-[#063E38] text-[#ECCB77]'} border border-[#D9A62E] sm:border-2 shadow-xs`}>
+        <div className={`inline-flex items-center px-2.5 sm:px-4 md:px-5 py-1 sm:py-2 md:py-2.5 rounded-lg sm:rounded-xl md:rounded-2xl ${isFooter ? 'bg-[#063E38]/95 text-white' : 'bg-[#063E38] text-[#ECCB77]'} border border-[#D9A62E] sm:border-2 shadow-xs`}>
           <span 
             id="brand-name-text"
-            className={`text-xs sm:text-base md:text-xl font-bold tracking-tight font-serif whitespace-nowrap ${isFooter ? 'text-white' : 'text-[#ECCB77]'}`}
+            className={`text-xs sm:text-lg md:text-xl lg:text-2xl font-bold tracking-tight font-serif whitespace-nowrap ${isFooter ? 'text-white' : 'text-[#ECCB77]'}`}
           >
             {brandName}
           </span>
@@ -128,7 +128,7 @@ export const UomamaLogo: React.FC<LogoProps> = ({
         {showTagline && (
           <span 
             id="brand-tagline-text"
-            className={`block text-[8.5px] sm:text-[10.5px] md:text-xs font-bold ${isFooter ? 'text-[#ECCB77]' : 'text-[#063E38]'} tracking-tight mt-0.5 sm:mt-1 select-none`}
+            className={`block text-[9px] sm:text-xs md:text-sm font-bold ${isFooter ? 'text-[#ECCB77]' : 'text-[#063E38]'} tracking-tight mt-0.5 sm:mt-1 select-none`}
           >
             {tagline}
           </span>
