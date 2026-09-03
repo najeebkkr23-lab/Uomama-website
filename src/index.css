@@ -1,0 +1,214 @@
+@import "tailwindcss";
+
+@layer base {
+  *, *::before, *::after {
+    -webkit-tap-highlight-color: transparent !important;
+    outline: none !important;
+  }
+
+  *:focus, *:focus-visible, *:active {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+
+  /* Prevent text color change or blue highlight when clicking on any line or card */
+  ::selection {
+    background: transparent !important;
+    color: inherit !important;
+  }
+  ::-moz-selection {
+    background: transparent !important;
+    color: inherit !important;
+  }
+
+  body {
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: #092B4C;
+    background-color: #ECD8A5;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  /* Keep input fields functional for typing */
+  input, textarea, select, [contenteditable="true"] {
+    -webkit-user-select: text !important;
+    -moz-user-select: text !important;
+    -ms-user-select: text !important;
+    user-select: text !important;
+  }
+}
+
+/* Universal Clickable Pointer Cursor: Pointing hand with finger on all interactive elements & their children */
+button,
+button *,
+a,
+a *,
+[role="button"],
+[role="button"] *,
+[role="tab"],
+[role="tab"] *,
+[role="link"],
+[role="link"] *,
+.cursor-pointer,
+.cursor-pointer *,
+#brand-logo-btn,
+#brand-logo-btn *,
+[id^="service-card-"],
+[id^="service-card-"] *,
+[id^="service-filter-"],
+[id^="service-filter-"] *,
+[id^="portfolio-card-"],
+[id^="portfolio-card-"] *,
+[id^="why-us-"],
+[id^="why-us-"] *,
+[id^="how-it-works-"],
+[id^="how-it-works-"] *,
+[id^="faq-item-"],
+[id^="faq-item-"] *,
+[id^="faq-filter-"],
+[id^="faq-filter-"] *,
+[id^="offering-card-"],
+[id^="offering-card-"] *,
+[id^="related-service-card-"],
+[id^="related-service-card-"] *,
+[id*="-btn"],
+[id*="-btn"] *,
+[id*="toggle"],
+[id*="toggle"] *,
+[id*="cta"],
+[id*="cta"] *,
+summary,
+summary *,
+select,
+select *,
+label[for],
+label[for] *,
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
+input[type="checkbox"],
+input[type="radio"] {
+  cursor: pointer !important;
+}
+
+/* Ensure text entry input fields retain the standard text selection cursor */
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="number"],
+input[type="password"],
+input[type="search"],
+input[type="url"],
+textarea {
+  cursor: text !important;
+}
+
+/* Disabled buttons */
+button:disabled,
+button:disabled *,
+[disabled],
+[disabled] * {
+  cursor: not-allowed !important;
+}
+
+/* Card & Line Invariance: No color change or movement on hover or click */
+[id^="service-card-"],
+[id^="why-us-"],
+[id^="how-it-works-"],
+[id^="faq-item-"],
+[id^="offering-card-"],
+[id^="related-service-card-"] {
+  border-color: #D9A62E !important;
+  transform: none !important;
+  transition: none !important;
+}
+
+[id^="service-card-"]:hover,
+[id^="service-card-"]:active,
+[id^="service-card-"]:focus,
+[id^="why-us-"]:hover,
+[id^="why-us-"]:active,
+[id^="why-us-"]:focus,
+[id^="how-it-works-"]:hover,
+[id^="how-it-works-"]:active,
+[id^="how-it-works-"]:focus,
+[id^="faq-item-"]:hover,
+[id^="faq-item-"]:active,
+[id^="faq-item-"]:focus,
+[id^="offering-card-"]:hover,
+[id^="offering-card-"]:active,
+[id^="offering-card-"]:focus,
+[id^="related-service-card-"]:hover,
+[id^="related-service-card-"]:active,
+[id^="related-service-card-"]:focus {
+  border-color: #D9A62E !important;
+  transform: none !important;
+}
+
+/* Header & Brand Invariance: No color changes on hover */
+#brand-logo-btn,
+#brand-logo-btn:hover,
+#brand-logo-btn:active,
+#brand-logo-btn:focus {
+  transform: none !important;
+  text-decoration: none !important;
+}
+
+#brand-name-text,
+#brand-name-text:hover,
+#brand-logo-btn:hover #brand-name-text,
+#brand-logo-btn:active #brand-name-text {
+  color: #ECCB77 !important;
+  text-decoration: none !important;
+}
+
+#brand-tagline-text,
+#brand-tagline-text:hover,
+#brand-logo-btn:hover #brand-tagline-text,
+#brand-logo-btn:active #brand-tagline-text {
+  color: #063E38 !important;
+  text-decoration: none !important;
+}
+
+footer #brand-name-text,
+footer #brand-name-text:hover,
+footer #brand-logo-btn:hover #brand-name-text {
+  color: #FFFFFF !important;
+}
+
+footer #brand-tagline-text,
+footer #brand-tagline-text:hover,
+footer #brand-logo-btn:hover #brand-tagline-text {
+  color: #ECCB77 !important;
+}
+
+#brand-logo-btn:hover div,
+#brand-logo-btn:active div {
+  border-color: #D9A62E !important;
+  transform: none !important;
+}
+
+#main-header nav button:hover {
+  color: #042420 !important;
+}
+
+/* Refined rich luxury golden theme scrollbars */
+::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+}
+::-webkit-scrollbar-track {
+  background: #E8D196;
+}
+::-webkit-scrollbar-thumb {
+  background: #D9A62E;
+  border-radius: 4px;
+  border: 1px solid #C79522;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #C79522;
+}
+
+

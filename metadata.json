@@ -1,0 +1,6 @@
+{
+  "name": "Uomama Business Solutions",
+  "description": "Smart Solutions. Better Business. Global Growth. Official portal for USA & UK company formations, taxation, e-commerce consulting, AI agent development, website design, SEO, and graphic design.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
