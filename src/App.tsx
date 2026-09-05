@@ -189,8 +189,8 @@ export default function App() {
       <div className="min-h-screen bg-[#F7F3EB] text-[#042420] antialiased">
         <AdminDashboard
           onBackToWebsite={() => {
-            const liveSiteUrl = import.meta.env.VITE_FRONTEND_URL || 'https://uomamabusiness.com';
-            window.open(liveSiteUrl, '_blank');
+            const savedUrl = (typeof window !== 'undefined' && localStorage.getItem('uomama_website_url')) || import.meta.env.VITE_FRONTEND_URL || 'https://uomamabusiness.com';
+            window.open(savedUrl, '_blank');
           }}
           onNavigateToService={handleSelectService}
         />
