@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Settings } from 'lucide-react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { ServicesSection } from './components/ServicesSection';
@@ -277,31 +276,6 @@ export default function App() {
         type={activePolicyModal}
         onClose={() => setActivePolicyModal(null)}
       />
-
-      {/* Persistent Floating Side-Access Button for Admin / Backend Dashboard */}
-      {currentView !== 'admin' && (
-        <aside 
-          id="floating-backend-side-dock"
-          className="fixed right-3 bottom-6 sm:bottom-8 sm:right-6 z-40 animate-in fade-in slide-in-from-right-4 duration-300 pointer-events-auto"
-          aria-label="Admin Backend Quick Access"
-        >
-          <button
-            id="floating-backend-dashboard-btn"
-            onClick={() => handleNavigate('admin')}
-            className="group flex items-center gap-2.5 px-4 py-2.5 rounded-2xl bg-gradient-to-b from-[#0D554D] via-[#073630] to-[#031E1B] text-[#ECCB77] hover:text-white border-2 border-[#D9A62E] hover:border-[#FFF0C2] shadow-[0_8px_25px_rgba(3,30,27,0.5),0_0_15px_rgba(217,166,46,0.35)] hover:shadow-[0_12px_30px_rgba(3,30,27,0.7),0_0_25px_rgba(217,166,46,0.6)] hover:scale-105 transition-all duration-300 cursor-pointer"
-            title="Open Admin Dashboard & SEO Backend"
-          >
-            <div className="w-8 h-8 rounded-xl bg-gradient-to-b from-[#073630] to-[#021714] border border-[#D9A62E] flex items-center justify-center text-[#ECCB77] group-hover:rotate-90 transition-transform duration-500 shadow-xs">
-              <Settings className="w-4 h-4" />
-            </div>
-            <div className="flex flex-col text-left pr-1">
-              <span className="text-[10px] font-extrabold uppercase tracking-wider text-[#ECCB77] leading-none">UBS Portal</span>
-              <span className="text-xs font-bold text-white whitespace-nowrap leading-tight mt-0.5">Admin / Backend</span>
-            </div>
-          </button>
-        </aside>
-      )}
-
     </div>
   );
 }

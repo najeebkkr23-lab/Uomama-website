@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { SiteSettings, LeadItem, ServiceType } from '../types';
+import { getApiUrl } from '../utils/api';
 
 const DEFAULT_SETTINGS: SiteSettings = {
   branding: {
@@ -234,7 +235,7 @@ export const SiteSettingsProvider: React.FC<{ children: ReactNode }> = ({ childr
   useEffect(() => {
     const fetchBackendSettingsAndLeads = async () => {
       try {
-        const res = await fetch('/api/admin/settings');
+        const res = await fetch(getApiUrl('/api/admin/settings'));
         if (res.ok) {
           const data = await res.json();
           if (data.settings) {
@@ -253,7 +254,7 @@ export const SiteSettingsProvider: React.FC<{ children: ReactNode }> = ({ childr
       }
 
       try {
-        const resLeads = await fetch('/api/consultations');
+        const resLeads = await fetch(getApiUrl('/api/consultations'));
         if (resLeads.ok) {
           const dataLeads = await resLeads.json();
           if (Array.isArray(dataLeads.leads) && dataLeads.leads.length > 0) {
@@ -386,7 +387,7 @@ export const SiteSettingsProvider: React.FC<{ children: ReactNode }> = ({ childr
 
     // Push to backend
     try {
-      await fetch('/api/admin/settings', {
+      await fetch(getApiUrl('/api/admin/settings'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ settings: updated }),
@@ -425,7 +426,7 @@ export const SiteSettingsProvider: React.FC<{ children: ReactNode }> = ({ childr
   const uploadLogo = (logoDataUrl: string) => {
     updateBranding({ logoUrl: logoDataUrl });
     // Also try to push to backend endpoint
-    fetch('/api/admin/upload-logo', {
+    fetch(getApiUrl('/api/admin/upload-logo'), {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ logoDataUrl }),
@@ -448,7 +449,7 @@ export const SiteSettingsProvider: React.FC<{ children: ReactNode }> = ({ childr
 
     // Send to backend
     try {
-      const res = await fetch('/api/consultations', {
+      const res = await fetch(getApiUrl('/api/consultations'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newLead),
@@ -471,7 +472,7 @@ export const SiteSettingsProvider: React.FC<{ children: ReactNode }> = ({ childr
       prev.map((lead) => (lead.id === id ? { ...lead, status } : lead))
     );
 
-    fetch(`/api/admin/leads/${id}`, {
+    fetch(getApiUrl(`/api/admin/leads/${id}`), {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ status }),
@@ -483,7 +484,7 @@ export const SiteSettingsProvider: React.FC<{ children: ReactNode }> = ({ childr
       prev.map((lead) => (lead.id === id ? { ...lead, adminNotes } : lead))
     );
 
-    fetch(`/api/admin/leads/${id}`, {
+    fetch(getApiUrl(`/api/admin/leads/${id}`), {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ adminNotes }),
@@ -493,14 +494,14 @@ export const SiteSettingsProvider: React.FC<{ children: ReactNode }> = ({ childr
   const deleteLead = (id: string) => {
     setLeads((prev) => prev.filter((lead) => lead.id !== id));
 
-    fetch(`/api/admin/leads/${id}`, {
+    fetch(getApiUrl(`/api/admin/leads/${id}`), {
       method: 'DELETE',
     }).catch(() => {});
   };
 
   const refreshLeads = async () => {
     try {
-      const res = await fetch('/api/consultations');
+      const res = await fetch(getApiUrl('/api/consultations'));
       if (res.ok) {
         const data = await res.json();
         if (Array.isArray(data.leads)) {

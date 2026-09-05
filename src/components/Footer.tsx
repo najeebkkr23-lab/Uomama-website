@@ -1,5 +1,5 @@
 import React from 'react';
-import { Mail, Clock, Shield, ArrowRight, Phone, MapPin, Sparkles, Lock, Settings } from 'lucide-react';
+import { Mail, Clock, Shield, ArrowRight, Phone, MapPin, Sparkles, Lock } from 'lucide-react';
 import { ServiceType } from '../types';
 import { UomamaLogo } from './Logo';
 import { useSiteSettings } from '../context/SiteSettingsContext';
@@ -283,14 +283,6 @@ export const Footer: React.FC<FooterProps> = ({
               className="text-slate-200 hover:text-[#ECCB77] transition-colors cursor-pointer"
             >
               Terms & Conditions
-            </button>
-            <button
-              id="footer-admin-link"
-              onClick={() => onNavigate('admin')}
-              className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[11px] font-medium text-[#ECCB77] hover:text-white bg-[#D9A62E]/10 hover:bg-[#D9A62E]/25 border border-[#D9A62E]/40 transition-colors cursor-pointer"
-            >
-              <Settings className="w-3 h-3 text-[#ECCB77]" />
-              <span>Admin Portal / Backend</span>
             </button>
           </div>
         </div>

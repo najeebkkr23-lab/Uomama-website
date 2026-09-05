@@ -30,6 +30,7 @@ import {
 import { useSiteSettings } from '../context/SiteSettingsContext';
 import { LeadItem, ServiceType } from '../types';
 import { UomamaLogo } from './Logo';
+import { getApiUrl } from '../utils/api';
 
 interface AdminDashboardProps {
   onBackToWebsite: () => void;
@@ -258,7 +259,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
   const handleRunSeoAudit = async () => {
     setIsAuditing(true);
     try {
-      const res = await fetch('/api/admin/seo-audit', {
+      const res = await fetch(getApiUrl('/api/admin/seo-audit'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
       });
