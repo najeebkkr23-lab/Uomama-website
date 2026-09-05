@@ -24,7 +24,32 @@ import { servicesData } from './data/services';
 import { useSiteSettings } from './context/SiteSettingsContext';
 
 export default function App() {
-  const [currentView, setCurrentView] = useState<AppView>('home');
+  // Detect if running on Railway or in dedicated Admin mode
+  const isDedicatedAdminMode = typeof window !== 'undefined' && (
+    window.location.hostname.includes('railway.app') ||
+    window.location.hostname.includes('railway') ||
+    import.meta.env.VITE_APP_MODE === 'admin' ||
+    window.location.pathname === '/admin' ||
+    window.location.pathname.startsWith('/admin/') ||
+    window.location.hash === '#admin'
+  );
+
+  const [currentView, setCurrentView] = useState<AppView>(() => {
+    if (typeof window !== 'undefined') {
+      if (
+        window.location.hostname.includes('railway.app') ||
+        window.location.hostname.includes('railway') ||
+        import.meta.env.VITE_APP_MODE === 'admin' ||
+        window.location.pathname === '/admin' ||
+        window.location.pathname.startsWith('/admin/') ||
+        window.location.hash === '#admin'
+      ) {
+        return 'admin';
+      }
+    }
+    return 'home';
+  });
+
   const [isConsultationModalOpen, setIsConsultationModalOpen] = useState(false);
   const [selectedServiceForModal, setSelectedServiceForModal] = useState<ServiceType | 'general-consultation'>('usa-tax');
   const [selectedServiceDetailModal, setSelectedServiceDetailModal] = useState<ServiceItem | null>(null);
@@ -36,12 +61,28 @@ export default function App() {
     applyPageSeo(currentView);
   }, [currentView, applyPageSeo]);
 
-  // Synchronize with URL hash for clean client navigation and bookmarking
+  // Synchronize with URL hash or path for clean client navigation and bookmarking
   useEffect(() => {
-    const handleHashChange = () => {
+    const handleNavigation = () => {
+      // If deployed on Railway or in Admin mode, lock view strictly to Admin Dashboard
+      if (
+        window.location.hostname.includes('railway.app') ||
+        window.location.hostname.includes('railway') ||
+        import.meta.env.VITE_APP_MODE === 'admin'
+      ) {
+        setCurrentView('admin');
+        return;
+      }
+
       const hash = window.location.hash.replace('#', '');
+      const path = window.location.pathname.toLowerCase();
       
-      if (hash === 'admin' || hash === 'dashboard' || hash === 'backend') {
+      if (
+        hash === 'admin' || 
+        hash === 'dashboard' || 
+        path === '/admin' || 
+        path.startsWith('/admin')
+      ) {
         setCurrentView('admin');
         window.scrollTo({ top: 0, behavior: 'smooth' });
         return;
@@ -71,9 +112,13 @@ export default function App() {
       }
     };
 
-    handleHashChange();
-    window.addEventListener('hashchange', handleHashChange);
-    return () => window.removeEventListener('hashchange', handleHashChange);
+    handleNavigation();
+    window.addEventListener('hashchange', handleNavigation);
+    window.addEventListener('popstate', handleNavigation);
+    return () => {
+      window.removeEventListener('hashchange', handleNavigation);
+      window.removeEventListener('popstate', handleNavigation);
+    };
   }, []);
 
   const handleNavigate = (target: string) => {
@@ -137,6 +182,21 @@ export default function App() {
     }
     setIsConsultationModalOpen(true);
   };
+
+  // Dedicated Standalone Admin Console View (For Railway Deployment)
+  if (currentView === 'admin') {
+    return (
+      <div className="min-h-screen bg-[#F7F3EB] text-[#042420] antialiased">
+        <AdminDashboard
+          onBackToWebsite={() => {
+            const liveSiteUrl = import.meta.env.VITE_FRONTEND_URL || 'https://uomamabusiness.com';
+            window.open(liveSiteUrl, '_blank');
+          }}
+          onNavigateToService={handleSelectService}
+        />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-[#ECD8A5] text-[#092B4C] font-sans selection:bg-[#D9A62E]/40 selection:text-[#092B4C] antialiased">
@@ -226,13 +286,6 @@ export default function App() {
             onNavigateHome={() => handleNavigate('home')}
             onSelectService={handleSelectService}
             initialService={selectedServiceForModal}
-          />
-        )}
-
-        {currentView === 'admin' && (
-          <AdminDashboard
-            onBackToWebsite={() => handleNavigate('home')}
-            onNavigateToService={handleSelectService}
           />
         )}
 
