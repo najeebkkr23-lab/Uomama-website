@@ -5,8 +5,8 @@ interface BoomerangVideoBgProps {
   imageUrl?: string;
 }
 
-// Single high-resolution, crystal-clear corporate glass skyscraper & skyline backdrop
-const DEFAULT_HERO_BG = "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=2160&q=85";
+// The exact high-definition corporate skyline visual that previously loaded afterwards, now served instantly with zero flicker
+const DEFAULT_HERO_BG = "/hero-bg.webp";
 
 export const BoomerangVideoBg: React.FC<BoomerangVideoBgProps> = ({
   imageUrl = DEFAULT_HERO_BG,
@@ -14,16 +14,19 @@ export const BoomerangVideoBg: React.FC<BoomerangVideoBgProps> = ({
 }) => {
   return (
     <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden select-none">
-      {/* Crystal-clear, stable corporate architecture backdrop - Single image, zero flicker */}
+      {/* Crystal-clear, exact corporate skyline architecture backdrop - Zero delay, zero flicker */}
       <div className="w-full h-full scale-105 origin-center overflow-hidden relative">
-        <img
-          src={imageUrl}
-          alt="Corporate Business Architecture"
-          fetchPriority="high"
-          loading="eager"
-          decoding="sync"
-          className="w-full h-full object-cover object-center filter saturate-130 contrast-120 brightness-105"
-        />
+        <picture>
+          <source srcSet={imageUrl} type="image/webp" />
+          <img
+            src="/hero-bg.jpg"
+            alt="Corporate Skyline Architecture"
+            fetchPriority="high"
+            loading="eager"
+            decoding="sync"
+            className="w-full h-full object-cover object-center filter saturate-135 contrast-120 brightness-105"
+          />
+        </picture>
       </div>
 
       {/* Vibrant Luxury Amber & Gold Tone Enhancer */}
@@ -34,4 +37,5 @@ export const BoomerangVideoBg: React.FC<BoomerangVideoBgProps> = ({
     </div>
   );
 };
+
 
