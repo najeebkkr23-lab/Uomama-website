@@ -24,10 +24,8 @@ import { servicesData } from './data/services';
 import { useSiteSettings } from './context/SiteSettingsContext';
 
 export default function App() {
-  // Detect if running on Railway or in dedicated Admin mode
+  // Detect if explicitly in Admin mode via path, hash, or environment variable
   const isDedicatedAdminMode = typeof window !== 'undefined' && (
-    window.location.hostname.includes('railway.app') ||
-    window.location.hostname.includes('railway') ||
     import.meta.env.VITE_APP_MODE === 'admin' ||
     window.location.pathname === '/admin' ||
     window.location.pathname.startsWith('/admin/') ||
@@ -37,8 +35,6 @@ export default function App() {
   const [currentView, setCurrentView] = useState<AppView>(() => {
     if (typeof window !== 'undefined') {
       if (
-        window.location.hostname.includes('railway.app') ||
-        window.location.hostname.includes('railway') ||
         import.meta.env.VITE_APP_MODE === 'admin' ||
         window.location.pathname === '/admin' ||
         window.location.pathname.startsWith('/admin/') ||
@@ -64,12 +60,8 @@ export default function App() {
   // Synchronize with URL hash or path for clean client navigation and bookmarking
   useEffect(() => {
     const handleNavigation = () => {
-      // If deployed on Railway or in Admin mode, lock view strictly to Admin Dashboard
-      if (
-        window.location.hostname.includes('railway.app') ||
-        window.location.hostname.includes('railway') ||
-        import.meta.env.VITE_APP_MODE === 'admin'
-      ) {
+      // If environment variable explicitly sets admin mode
+      if (import.meta.env.VITE_APP_MODE === 'admin') {
         setCurrentView('admin');
         return;
       }
