@@ -193,6 +193,21 @@ export interface TestimonialItem {
   rating: number;
   quote: string;
   metric?: string;
+  verified?: boolean;
+  orderRefId?: string; // e.g., UBS-WY-8421
+  dateSubmitted?: string;
+}
+
+export interface VerifiedReviewSubmission {
+  fullName: string;
+  role: string;
+  companyOrLocation: string;
+  email: string;
+  orderRefId: string;
+  serviceUsed: string;
+  rating: number;
+  metric: string;
+  quote: string;
 }
 
 

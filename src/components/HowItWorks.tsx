@@ -89,11 +89,12 @@ export const HowItWorks: React.FC<HowItWorksProps> = ({ onOpenConsultation }) =>
                     </p>
                   </div>
 
-                  <div className="mt-8 pt-4 border-t border-[#D9A62E]/30 flex items-center text-xs font-bold text-[#063E38] bg-[#FAF2DB]/80 -mx-3 px-3 py-2.5 rounded-xl border border-[#D9A62E]/40">
-                    <span className="inline-flex items-center gap-1.5">
+                  <div className="mt-8 pt-4 border-t border-[#D9A62E]/30 flex items-center justify-between text-xs font-bold text-[#063E38]">
+                    <span className="inline-flex items-center gap-1.5 text-[#063E38]">
                       <Sparkles className="w-3.5 h-3.5 text-[#D9A62E]" />
                       Clear Milestones & Reporting
                     </span>
+                    <span className="text-[11px] font-bold text-[#D9A62E] uppercase tracking-wider">Phase {index + 1}</span>
                   </div>
                 </div>
               </div>

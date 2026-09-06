@@ -5,7 +5,6 @@ import { ServicesSection } from './components/ServicesSection';
 import { TestimonialsSection } from './components/TestimonialsSection';
 import { WhyChooseUs } from './components/WhyChooseUs';
 import { HowItWorks } from './components/HowItWorks';
-import { EcommerceSection } from './components/EcommerceSection';
 import { AboutSection } from './components/AboutSection';
 import { FaqSection } from './components/FaqSection';
 import { ContactSection } from './components/ContactSection';
@@ -227,12 +226,6 @@ export default function App() {
             {/* How It Works Section */}
             <HowItWorks
               onOpenConsultation={handleOpenConsultation}
-            />
-
-            {/* E-Commerce Consulting Section */}
-            <EcommerceSection
-              onOpenConsultation={handleOpenConsultation}
-              onSelectService={handleSelectService}
             />
 
             {/* About Us Summary Section */}

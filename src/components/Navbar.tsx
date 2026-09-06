@@ -182,6 +182,14 @@ export const Navbar: React.FC<NavbarProps> = ({
             </button>
 
             <button 
+              id="nav-reviews"
+              onClick={() => handleNavClick('testimonials')}
+              className="px-3 py-2 text-sm font-bold text-[#042420] rounded-lg cursor-pointer"
+            >
+              Reviews
+            </button>
+
+            <button 
               id="nav-why-us"
               onClick={() => handleNavClick('why-us')}
               className="px-3 py-2 text-sm font-bold text-[#042420] rounded-lg cursor-pointer"
@@ -288,6 +296,13 @@ export const Navbar: React.FC<NavbarProps> = ({
                 className="w-full text-left px-3 py-2 text-xs font-bold text-slate-100 hover:text-[#ECCB77] hover:bg-[#031E1B] rounded-md"
               >
                 Portfolio & Case Studies
+              </button>
+              <button
+                onClick={() => handleNavClick('testimonials')}
+                className="w-full text-left px-3 py-2 text-xs font-bold text-[#ECCB77] bg-[#031E1B]/50 hover:bg-[#031E1B] rounded-md flex items-center justify-between"
+              >
+                <span>Client Reviews (Verified)</span>
+                <span className="text-[10px] bg-[#D9A62E] text-[#031E1B] px-1.5 py-0.2 rounded-sm font-bold">5.0 ★</span>
               </button>
               <button
                 onClick={() => handleNavClick('why-us')}

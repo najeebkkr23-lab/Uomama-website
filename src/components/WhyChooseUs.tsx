@@ -105,10 +105,11 @@ export const WhyChooseUs: React.FC = () => {
                     </p>
                   </div>
 
-                  <div className="pt-4 border-t border-[#D9A62E]/30 space-y-2.5 bg-[#FAF2DB]/80 -mx-3 px-4 py-3 rounded-xl border border-[#D9A62E]/40">
+                  {/* Key Advisory Points (Clean, no nested card clutter) */}
+                  <div className="pt-4 border-t border-[#D9A62E]/30 space-y-2.5">
                     {benefit.points.map((pt, idx) => (
                       <div key={idx} className="flex items-center gap-2.5 text-xs font-semibold text-slate-800">
-                        <CheckCircle2 className="w-4 h-4 text-[#063E38] shrink-0" />
+                        <CheckCircle2 className="w-4 h-4 text-[#D9A62E] shrink-0" />
                         <span>{pt}</span>
                       </div>
                     ))}

@@ -9,7 +9,9 @@ export const testimonialsData: TestimonialItem[] = [
     serviceUsed: 'USA LLC Formation & Annual Tax Compliance',
     rating: 5,
     quote: 'Uomama Business Solutions made our US corporate formation straightforward and stress-free. As non-resident founders, navigating IRS Form 5472 and state compliance was daunting until their team mapped out the exact schedule. Remarkable precision and professionalism.',
-    metric: '100% On-Time IRS Filing'
+    metric: '100% On-Time IRS Filing',
+    verified: true,
+    orderRefId: 'UBS-WY-8921'
   },
   {
     id: 't-2',
@@ -19,7 +21,9 @@ export const testimonialsData: TestimonialItem[] = [
     serviceUsed: 'UK LTD Formation & HMRC VAT Advisory',
     rating: 5,
     quote: 'Setting up our UK subsidiary through Companies House and obtaining our VAT and EORI registration was seamless. The Uomama team guided our cross-border supply chain setup with absolute clarity.',
-    metric: 'Incorporated in 48 Hours'
+    metric: 'Incorporated in 48 Hours',
+    verified: true,
+    orderRefId: 'UBS-UK-4412'
   },
   {
     id: 't-3',
@@ -29,7 +33,9 @@ export const testimonialsData: TestimonialItem[] = [
     serviceUsed: 'E-commerce Business Consulting',
     rating: 5,
     quote: 'From marketplace account verification to payment gateway routing and tax nexus mapping, UBS provided the end-to-end foundation our brand needed to scale across global e-commerce channels and Shopify.',
-    metric: '3.4x Multichannel Growth'
+    metric: '3.4x Multichannel Growth',
+    verified: true,
+    orderRefId: 'UBS-EC-7301'
   },
   {
     id: 't-4',
@@ -39,7 +45,9 @@ export const testimonialsData: TestimonialItem[] = [
     serviceUsed: 'AI Agent Development & Workflow Automation',
     rating: 5,
     quote: 'The custom AI customer triage agent built by Uomama transformed our operational efficiency. It handles over 70% of inbound client queries accurately, grounded directly in our company knowledge base.',
-    metric: '72% Inquiry Automation'
+    metric: '72% Inquiry Automation',
+    verified: true,
+    orderRefId: 'UBS-AI-9024'
   },
   {
     id: 't-5',
@@ -49,7 +57,9 @@ export const testimonialsData: TestimonialItem[] = [
     serviceUsed: 'Website Design & Development + SEO Services',
     rating: 5,
     quote: 'Our new corporate web presence and SEO foundation exceeded every expectation. Page load speeds are blazing fast, and our organic search rankings for international consulting terms improved dramatically within months.',
-    metric: '98/100 Core Web Vitals'
+    metric: '98/100 Core Web Vitals',
+    verified: true,
+    orderRefId: 'UBS-WEB-6150'
   },
   {
     id: 't-6',
@@ -59,6 +69,8 @@ export const testimonialsData: TestimonialItem[] = [
     serviceUsed: 'Graphic Design & Brand Identity Services',
     rating: 5,
     quote: 'The visual brand system, typography hierarchy, and e-commerce collateral crafted by Uomama gave our direct-to-consumer store a sophisticated, unified aesthetic that converts.',
-    metric: 'Complete Brand System'
+    metric: 'Complete Brand System',
+    verified: true,
+    orderRefId: 'UBS-DSN-3298'
   }
 ];

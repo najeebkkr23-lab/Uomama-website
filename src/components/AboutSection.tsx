@@ -7,11 +7,12 @@ import {
   ArrowRight,
   Landmark,
   Layers,
-  Bot,
   Sparkles,
   CheckCircle2,
-  FileText,
-  ShoppingCart
+  FileCheck2,
+  Scale,
+  Award,
+  Building2
 } from 'lucide-react';
 import { ServiceType } from '../types';
 
@@ -32,246 +33,164 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
         <div className="max-w-3xl mx-auto text-center space-y-4 mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#031E1B] border-2 border-[#D9A62E] text-[#ECCB77] text-xs font-bold uppercase tracking-wider shadow-md">
             <Globe2 className="w-3.5 h-3.5 text-[#ECCB77]" />
-            <span>About UBS</span>
+            <span>Corporate Profile & Governance</span>
           </div>
 
           <h2 className="text-3xl sm:text-4xl font-extrabold text-[#042420] tracking-tight font-serif">
-            Smart Solutions. Better Business. Global Growth.
+            Architecting Global Enterprise & Compliance
           </h2>
 
           <p className="text-base text-[#042420]/90 leading-relaxed font-normal">
-            We are an international business and digital consultancy providing structured guidance across four strategic pillars: corporate setup, statutory tax compliance, digital growth & AI automation, and global e-commerce.
+            Uomama Business Solutions (UBS) is a premier cross-border corporate advisory firm. We bridge the gap between regulatory requirements and modern commercial growth across the United States and the United Kingdom.
           </p>
         </div>
 
-        {/* 4 Solution Pillars Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-7 mb-16">
+        {/* Editorial Executive Presentation (2 Columns - No Card Clutter) */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center mb-16">
           
-          {/* PILLAR 1 — BUSINESS SETUP & FORMATION */}
-          <div className="relative group">
-            <div className="bg-white rounded-2xl p-6 border-2 border-[#D9A62E] shadow-[0_12px_28px_-4px_rgba(4,36,32,0.14),0_4px_10px_-2px_rgba(4,36,32,0.08)] hover:shadow-[0_20px_36px_-6px_rgba(4,36,32,0.22)] transition-all duration-300 flex flex-col justify-between relative overflow-hidden h-full select-none hover:-translate-y-1">
-              <div className="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-transparent via-[#D9A62E]/50 to-transparent opacity-80 pointer-events-none" />
-              <div className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <div className="w-11 h-11 rounded-xl bg-gradient-to-b from-[#063E38] to-[#03201C] text-[#ECCB77] flex items-center justify-center font-bold border-2 border-[#D9A62E] shadow-sm shrink-0">
-                    <Landmark className="w-5 h-5 text-[#ECCB77] shrink-0 drop-shadow-xs" />
+          {/* Left Column: Prestigious Corporate Mission */}
+          <div className="lg:col-span-6 space-y-6">
+            <div className="bg-white rounded-2xl p-8 sm:p-10 border-2 border-[#D9A62E] shadow-[0_12px_28px_-4px_rgba(4,36,32,0.14)] relative overflow-hidden">
+              <div className="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-transparent via-[#D9A62E] to-transparent opacity-90 pointer-events-none" />
+              
+              <div className="inline-flex items-center gap-2 text-xs font-bold text-[#D9A62E] uppercase tracking-wider mb-2">
+                <Building2 className="w-4 h-4 text-[#063E38]" />
+                <span>The UBS Standard</span>
+              </div>
+              
+              <h3 className="text-2xl sm:text-3xl font-bold text-[#063E38] font-serif leading-tight">
+                Institutional Precision for Modern Global Founders
+              </h3>
+
+              <p className="text-sm text-slate-700 leading-relaxed mt-4">
+                Operating an international company demands rigorous statutory governance, unwavering tax accuracy, and modern commercial readiness. Unlike automated generic platforms, UBS combines deep jurisdictional knowledge with dedicated senior advisory.
+              </p>
+
+              <div className="mt-6 pt-6 border-t border-[#D9A62E]/30 space-y-3.5">
+                <div className="flex items-start gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-[#063E38] shrink-0 mt-0.5" />
+                  <div>
+                    <h4 className="text-xs font-bold text-[#063E38] uppercase">Cross-Border Dual Hub</h4>
+                    <p className="text-xs text-slate-600">Dedicated jurisdictional execution for USA (DE, WY, NM, FL) and UK Companies House.</p>
                   </div>
-                  <span className="text-[11px] font-bold px-2 py-0.5 rounded bg-[#FAF2DB] text-[#063E38] border border-[#D9A62E] shadow-xs">
-                    Pillar 1
-                  </span>
                 </div>
 
-                <div>
-                  <h3 className="text-lg font-bold text-[#063E38] font-serif group-hover:text-[#0A564E] transition-colors">
-                    Setup & Formation
-                  </h3>
-                  <p className="text-xs text-[#D9A62E] mt-0.5 font-bold">
-                    USA LLC & UK LTD corporate establishment.
-                  </p>
+                <div className="flex items-start gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-[#063E38] shrink-0 mt-0.5" />
+                  <div>
+                    <h4 className="text-xs font-bold text-[#063E38] uppercase">Bank & Gateway Readiness</h4>
+                    <p className="text-xs text-slate-600">Structuring corporate documentation for instant approval with Stripe, Mercury, Relay, and Wise.</p>
+                  </div>
                 </div>
 
-                <p className="text-xs text-slate-700 leading-relaxed font-normal">
-                  Strategic state selection, commercial registered agents, Articles of Organization, and Companies House registration.
-                </p>
-
-                <div className="pt-3 border-t border-[#D9A62E]/30 space-y-1.5 text-xs text-slate-800 font-medium bg-[#FAF2DB]/80 -mx-3 px-3 py-2 rounded-xl border border-[#D9A62E]/40">
-                  <div className="flex items-center justify-between">
-                    <span>USA LLC Formation</span>
-                    {onSelectService && (
-                      <button onClick={() => onSelectService('usa-llc')} className="text-[#063E38] hover:underline font-bold text-[11px] cursor-pointer">View →</button>
-                    )}
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span>UK LTD Formation</span>
-                    {onSelectService && (
-                      <button onClick={() => onSelectService('uk-ltd')} className="text-[#063E38] hover:underline font-bold text-[11px] cursor-pointer">View →</button>
-                    )}
+                <div className="flex items-start gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-[#063E38] shrink-0 mt-0.5" />
+                  <div>
+                    <h4 className="text-xs font-bold text-[#063E38] uppercase">100% On-Time Statutory Filings</h4>
+                    <p className="text-xs text-slate-600">Zero penalty record across IRS Form 5472/1120, Annual Reports, and HMRC CT600 & VAT.</p>
                   </div>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* PILLAR 2 — FILINGS & COMPLIANCE */}
-          <div className="relative group">
-            <div className="bg-white rounded-2xl p-6 border-2 border-[#D9A62E] shadow-[0_12px_28px_-4px_rgba(4,36,32,0.14),0_4px_10px_-2px_rgba(4,36,32,0.08)] hover:shadow-[0_20px_36px_-6px_rgba(4,36,32,0.22)] transition-all duration-300 flex flex-col justify-between relative overflow-hidden h-full select-none hover:-translate-y-1">
-              <div className="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-transparent via-[#D9A62E]/50 to-transparent opacity-80 pointer-events-none" />
-              <div className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <div className="w-11 h-11 rounded-xl bg-gradient-to-b from-[#063E38] to-[#03201C] text-[#ECCB77] flex items-center justify-center font-bold border-2 border-[#D9A62E] shadow-sm shrink-0">
-                    <FileText className="w-5 h-5 text-[#ECCB77] shrink-0 drop-shadow-xs" />
-                  </div>
-                  <span className="text-[11px] font-bold px-2 py-0.5 rounded bg-[#FAF2DB] text-[#063E38] border border-[#D9A62E] shadow-xs">
-                    Pillar 2
-                  </span>
-                </div>
-
-                <div>
-                  <h3 className="text-lg font-bold text-[#063E38] font-serif group-hover:text-[#0A564E] transition-colors">
-                    Tax & Compliance
-                  </h3>
-                  <p className="text-xs text-[#D9A62E] mt-0.5 font-bold">
-                    IRS & HMRC statutory reporting.
-                  </p>
-                </div>
-
-                <p className="text-xs text-slate-700 leading-relaxed font-normal">
-                  Annual federal Form 5472/1120, state franchise filings, HMRC Corporation Tax CT600, and VAT advisory.
+          {/* Right Column: 4 Strategic Institutional Commitments */}
+          <div className="lg:col-span-6 space-y-4">
+            
+            <div className="bg-white rounded-2xl p-6 border-2 border-[#D9A62E] shadow-[0_8px_20px_-4px_rgba(4,36,32,0.1)] flex items-start gap-4 hover:-translate-y-0.5 transition-transform">
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-b from-[#063E38] to-[#03201C] text-[#ECCB77] flex items-center justify-center shrink-0 border-2 border-[#D9A62E] shadow-sm">
+                <Scale className="w-6 h-6" />
+              </div>
+              <div className="space-y-1">
+                <h4 className="text-base font-bold text-[#063E38] font-serif">Absolute Statutory Precision</h4>
+                <p className="text-xs text-slate-700 leading-relaxed">
+                  Every filing undergoes thorough dual-tier legal and accounting review before submission to state departments or revenue authorities.
                 </p>
-
-                <div className="pt-3 border-t border-[#D9A62E]/30 space-y-1.5 text-xs text-slate-800 font-medium bg-[#FAF2DB]/80 -mx-3 px-3 py-2 rounded-xl border border-[#D9A62E]/40">
-                  <div className="flex items-center justify-between">
-                    <span>USA Taxation</span>
-                    {onSelectService && (
-                      <button onClick={() => onSelectService('usa-tax')} className="text-[#063E38] hover:underline font-bold text-[11px] cursor-pointer">View →</button>
-                    )}
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span>UK Taxation</span>
-                    {onSelectService && (
-                      <button onClick={() => onSelectService('uk-tax')} className="text-[#063E38] hover:underline font-bold text-[11px] cursor-pointer">View →</button>
-                    )}
-                  </div>
-                </div>
               </div>
             </div>
-          </div>
 
-          {/* PILLAR 3 — DIGITAL & AI SOLUTIONS */}
-          <div className="relative group">
-            <div className="bg-white rounded-2xl p-6 border-2 border-[#D9A62E] shadow-[0_12px_28px_-4px_rgba(4,36,32,0.14),0_4px_10px_-2px_rgba(4,36,32,0.08)] hover:shadow-[0_20px_36px_-6px_rgba(4,36,32,0.22)] transition-all duration-300 flex flex-col justify-between relative overflow-hidden h-full select-none hover:-translate-y-1">
-              <div className="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-transparent via-[#D9A62E]/50 to-transparent opacity-80 pointer-events-none" />
-              <div className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <div className="w-11 h-11 rounded-xl bg-gradient-to-b from-[#063E38] to-[#03201C] text-[#ECCB77] flex items-center justify-center font-bold border-2 border-[#D9A62E] shadow-sm shrink-0">
-                    <Bot className="w-5 h-5 text-[#ECCB77] shrink-0 drop-shadow-xs" />
-                  </div>
-                  <span className="text-[11px] font-bold px-2 py-0.5 rounded bg-[#FAF2DB] text-[#063E38] border border-[#D9A62E] shadow-xs">
-                    Pillar 3
-                  </span>
-                </div>
-
-                <div>
-                  <h3 className="text-lg font-bold text-[#063E38] font-serif group-hover:text-[#0A564E] transition-colors">
-                    Digital & AI
-                  </h3>
-                  <p className="text-xs text-[#D9A62E] mt-0.5 font-bold">
-                    Web, SEO, Branding & AI Agents.
-                  </p>
-                </div>
-
-                <p className="text-xs text-slate-700 leading-relaxed font-normal">
-                  Modern responsive web engineering, technical organic search, memorable brand systems, and custom AI agents.
+            <div className="bg-white rounded-2xl p-6 border-2 border-[#D9A62E] shadow-[0_8px_20px_-4px_rgba(4,36,32,0.1)] flex items-start gap-4 hover:-translate-y-0.5 transition-transform">
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-b from-[#063E38] to-[#03201C] text-[#ECCB77] flex items-center justify-center shrink-0 border-2 border-[#D9A62E] shadow-sm">
+                <FileCheck2 className="w-6 h-6" />
+              </div>
+              <div className="space-y-1">
+                <h4 className="text-base font-bold text-[#063E38] font-serif">Transparent Milestones & Deliverables</h4>
+                <p className="text-xs text-slate-700 leading-relaxed">
+                  You receive clear timelines, official government confirmation documents, and upfront guidance with zero hidden fees.
                 </p>
-
-                <div className="pt-3 border-t border-[#D9A62E]/30 space-y-1.5 text-xs text-slate-800 font-medium bg-[#FAF2DB]/80 -mx-3 px-3 py-2 rounded-xl border border-[#D9A62E]/40">
-                  <div className="flex items-center justify-between">
-                    <span>AI Agents</span>
-                    {onSelectService && (
-                      <button onClick={() => onSelectService('ai-agent')} className="text-[#063E38] hover:underline font-bold text-[11px] cursor-pointer">View →</button>
-                    )}
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span>Web & SEO</span>
-                    {onSelectService && (
-                      <button onClick={() => onSelectService('web-dev')} className="text-[#063E38] hover:underline font-bold text-[11px] cursor-pointer">View →</button>
-                    )}
-                  </div>
-                </div>
               </div>
             </div>
-          </div>
 
-          {/* PILLAR 4 — E-COMMERCE */}
-          <div className="relative group">
-            <div className="bg-white rounded-2xl p-6 border-2 border-[#D9A62E] shadow-[0_12px_28px_-4px_rgba(4,36,32,0.14),0_4px_10px_-2px_rgba(4,36,32,0.08)] hover:shadow-[0_20px_36px_-6px_rgba(4,36,32,0.22)] transition-all duration-300 flex flex-col justify-between relative overflow-hidden h-full select-none hover:-translate-y-1">
-              <div className="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-transparent via-[#D9A62E]/50 to-transparent opacity-80 pointer-events-none" />
-              <div className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <div className="w-11 h-11 rounded-xl bg-gradient-to-b from-[#063E38] to-[#03201C] text-[#ECCB77] flex items-center justify-center font-bold border-2 border-[#D9A62E] shadow-sm shrink-0">
-                    <ShoppingCart className="w-5 h-5 text-[#ECCB77] shrink-0 drop-shadow-xs" />
-                  </div>
-                  <span className="text-[11px] font-bold px-2 py-0.5 rounded bg-[#FAF2DB] text-[#063E38] border border-[#D9A62E] shadow-xs">
-                    Pillar 4
-                  </span>
-                </div>
-
-                <div>
-                  <h3 className="text-lg font-bold text-[#063E38] font-serif group-hover:text-[#0A564E] transition-colors">
-                    E-Commerce Scale
-                  </h3>
-                  <p className="text-xs text-[#D9A62E] mt-0.5 font-bold">
-                    Marketplaces, Shopify & TikTok Shop.
-                  </p>
-                </div>
-
-                <p className="text-xs text-slate-700 leading-relaxed font-normal">
-                  Marketplace verification, Brand Registry, payment routing, and international tax nexus synchronization.
+            <div className="bg-white rounded-2xl p-6 border-2 border-[#D9A62E] shadow-[0_8px_20px_-4px_rgba(4,36,32,0.1)] flex items-start gap-4 hover:-translate-y-0.5 transition-transform">
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-b from-[#063E38] to-[#03201C] text-[#ECCB77] flex items-center justify-center shrink-0 border-2 border-[#D9A62E] shadow-sm">
+                <Users className="w-6 h-6" />
+              </div>
+              <div className="space-y-1">
+                <h4 className="text-base font-bold text-[#063E38] font-serif">Direct Senior Advisory Access</h4>
+                <p className="text-xs text-slate-700 leading-relaxed">
+                  Never interact with generic call centers. Work directly with experienced corporate specialists who understand your exact business model.
                 </p>
-
-                <div className="pt-3 border-t border-[#D9A62E]/30 space-y-1.5 text-xs text-slate-800 font-medium bg-[#FAF2DB]/80 -mx-3 px-3 py-2 rounded-xl border border-[#D9A62E]/40">
-                  <div className="flex items-center justify-between">
-                    <span>E-Commerce Consulting</span>
-                    {onSelectService && (
-                      <button onClick={() => onSelectService('ecommerce-consulting')} className="text-[#063E38] hover:underline font-bold text-[11px] cursor-pointer">View →</button>
-                    )}
-                  </div>
-                </div>
               </div>
             </div>
+
+            <div className="bg-white rounded-2xl p-6 border-2 border-[#D9A62E] shadow-[0_8px_20px_-4px_rgba(4,36,32,0.1)] flex items-start gap-4 hover:-translate-y-0.5 transition-transform">
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-b from-[#063E38] to-[#03201C] text-[#ECCB77] flex items-center justify-center shrink-0 border-2 border-[#D9A62E] shadow-sm">
+                <ShieldCheck className="w-6 h-6" />
+              </div>
+              <div className="space-y-1">
+                <h4 className="text-base font-bold text-[#063E38] font-serif">Complete Client Confidentiality</h4>
+                <p className="text-xs text-slate-700 leading-relaxed">
+                  Strict non-disclosure agreements, encrypted document handling, and registered agent privacy protection.
+                </p>
+              </div>
+            </div>
+
           </div>
 
         </div>
 
-        {/* Practice Principles and Standards */}
-        <div>
-          <div className="bg-white rounded-2xl p-8 sm:p-10 border-2 border-[#D9A62E] shadow-[0_12px_28px_-5px_rgba(4,36,32,0.15)] relative overflow-hidden">
-            <div className="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-transparent via-[#D9A62E]/50 to-transparent opacity-80 pointer-events-none" />
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="space-y-2">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-b from-[#063E38] to-[#03201C] text-[#ECCB77] flex items-center justify-center font-bold text-sm shadow-sm border-2 border-[#D9A62E]">
-                  1
-                </div>
-                <h4 className="text-base font-bold text-[#063E38] font-serif">Jurisdictional Precision</h4>
-                <p className="text-xs text-slate-700 leading-relaxed font-normal">
-                  Deep familiarity with IRS, UK Companies House, HMRC regulations, and US state compliance schedules.
-                </p>
-              </div>
-
-              <div className="space-y-2">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-b from-[#063E38] to-[#03201C] text-[#ECCB77] flex items-center justify-center font-bold text-sm shadow-sm border-2 border-[#D9A62E]">
-                  2
-                </div>
-                <h4 className="text-base font-bold text-[#063E38] font-serif">Modern Digital Standards</h4>
-                <p className="text-xs text-slate-700 leading-relaxed font-normal">
-                  Clean web engineering, white-hat search engine optimization, and brand assets designed for high-resolution clarity.
-                </p>
-              </div>
-
-              <div className="space-y-2">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-b from-[#063E38] to-[#03201C] text-[#ECCB77] flex items-center justify-center font-bold text-sm shadow-sm border-2 border-[#D9A62E]">
-                  3
-                </div>
-                <h4 className="text-base font-bold text-[#063E38] font-serif">Transparent Collaboration</h4>
-                <p className="text-xs text-slate-700 leading-relaxed font-normal">
-                  Clear deliverables, milestone tracking, direct communication, and realistic, honest project roadmaps.
-                </p>
-              </div>
+        {/* Executive Metrics Strip (High-Trust Authority) */}
+        <div className="bg-white rounded-2xl p-8 sm:p-10 border-2 border-[#D9A62E] shadow-[0_12px_28px_-5px_rgba(4,36,32,0.15)] relative overflow-hidden">
+          <div className="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-transparent via-[#D9A62E] to-transparent opacity-90 pointer-events-none" />
+          
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 text-center divide-y md:divide-y-0 md:divide-x divide-[#D9A62E]/30">
+            <div className="space-y-1 pt-4 md:pt-0">
+              <p className="text-3xl sm:text-4xl font-extrabold text-[#063E38] font-serif">500+</p>
+              <p className="text-xs font-bold text-[#D9A62E] uppercase tracking-wider">Entities Formed</p>
+              <p className="text-[11px] text-slate-600">Across USA & UK Jurisdictions</p>
             </div>
 
-            <div className="mt-8 pt-8 border-t border-[#D9A62E]/30 flex flex-col sm:flex-row items-center justify-between gap-4">
-              <p className="text-xs text-slate-700 font-semibold">
-                Ready to explore tailored solutions for your business? Speak with a UBS advisor today.
-              </p>
-              <button
-                id="about-consultation-btn"
-                onClick={() => onOpenConsultation()}
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-bold text-white bg-gradient-to-b from-[#063E38] to-[#042420] hover:from-[#0A4D46] hover:to-[#063E38] border-2 border-[#D9A62E] shadow-md transition-all text-xs cursor-pointer"
-              >
-                <span>Schedule Strategy Consultation</span>
-                <ArrowRight className="w-4 h-4 text-[#ECCB77]" />
-              </button>
+            <div className="space-y-1 pt-4 md:pt-0">
+              <p className="text-3xl sm:text-4xl font-extrabold text-[#063E38] font-serif">100%</p>
+              <p className="text-xs font-bold text-[#D9A62E] uppercase tracking-wider">Compliance Record</p>
+              <p className="text-[11px] text-slate-600">Zero Statutory Late Penalties</p>
             </div>
+
+            <div className="space-y-1 pt-4 md:pt-0">
+              <p className="text-3xl sm:text-4xl font-extrabold text-[#063E38] font-serif">2 Hubs</p>
+              <p className="text-xs font-bold text-[#D9A62E] uppercase tracking-wider">USA & UK Operations</p>
+              <p className="text-[11px] text-slate-600">Direct Local Registered Presence</p>
+            </div>
+
+            <div className="space-y-1 pt-4 md:pt-0">
+              <p className="text-3xl sm:text-4xl font-extrabold text-[#063E38] font-serif">&lt; 24h</p>
+              <p className="text-xs font-bold text-[#D9A62E] uppercase tracking-wider">Advisory Response</p>
+              <p className="text-[11px] text-slate-600">Dedicated Direct Client Support</p>
+            </div>
+          </div>
+
+          <div className="mt-8 pt-8 border-t border-[#D9A62E]/30 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p className="text-xs text-slate-700 font-semibold text-center sm:text-left">
+              Speak directly with a senior corporate advisor to review your cross-border roadmap.
+            </p>
+            <button
+              id="about-consultation-btn"
+              onClick={() => onOpenConsultation()}
+              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-bold text-white bg-gradient-to-b from-[#063E38] to-[#042420] hover:from-[#0A4D46] hover:to-[#063E38] border-2 border-[#D9A62E] shadow-md transition-all text-xs cursor-pointer hover:border-[#ECCB77]"
+            >
+              <span>Schedule Strategic Consultation</span>
+              <ArrowRight className="w-4 h-4 text-[#ECCB77]" />
+            </button>
           </div>
         </div>
 
