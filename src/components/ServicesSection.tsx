@@ -97,26 +97,26 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
             const Icon = getIcon(service.id);
 
             return (
-              <div key={service.id} className="relative">
+              <div key={service.id} className="relative group">
                 <div
                   id={`service-card-${service.id}`}
                   onClick={() => onSelectService(service.id)}
-                  className="flex flex-col justify-between rounded-2xl p-7 bg-gradient-to-b from-[#0D554D] via-[#073630] to-[#031E1B] border-2 border-[#D9A62E] shadow-[0_10px_25px_-5px_rgba(3,30,27,0.35),0_4px_10px_-2px_rgba(3,30,27,0.2),inset_0_1px_1px_rgba(255,255,255,0.2)] relative overflow-hidden cursor-pointer h-full select-none"
+                  className="flex flex-col justify-between rounded-2xl p-7 bg-white border-2 border-[#D9A62E] shadow-[0_12px_28px_-4px_rgba(4,36,32,0.14),0_4px_10px_-2px_rgba(4,36,32,0.08)] hover:shadow-[0_20px_36px_-6px_rgba(4,36,32,0.22)] transition-all duration-300 relative overflow-hidden cursor-pointer h-full select-none hover:-translate-y-1"
                 >
                   {/* Top 3D Metallic Edge Reflection */}
-                  <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-[#FFF4D4]/40 to-transparent opacity-80 pointer-events-none" />
+                  <div className="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-transparent via-[#D9A62E]/50 to-transparent opacity-80 pointer-events-none" />
 
                   <div>
-                    {/* Category & Jurisdiction Badge (3D mini cards) */}
+                    {/* Category & Jurisdiction Badge */}
                     <div className="flex items-center justify-between mb-5">
-                      <div className="w-12 h-12 rounded-xl bg-gradient-to-b from-[#073630] to-[#021714] text-[#ECCB77] flex items-center justify-center shadow-[0_3px_8px_rgba(3,30,27,0.3),inset_0_1px_1px_rgba(255,255,255,0.25)] border-2 border-[#D9A62E] shrink-0">
+                      <div className="w-12 h-12 rounded-xl bg-gradient-to-b from-[#063E38] to-[#03201C] text-[#ECCB77] flex items-center justify-center shadow-md border-2 border-[#D9A62E] shrink-0">
                         <Icon className="w-6 h-6 text-[#ECCB77] shrink-0 drop-shadow-xs" />
                       </div>
                       <div className="flex items-center gap-1.5">
-                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-md text-[11px] font-bold bg-[#021815] text-[#ECCB77] border border-[#D9A62E]/60 shadow-xs">
+                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-md text-[11px] font-bold bg-[#FAF2DB] text-[#063E38] border border-[#D9A62E] shadow-xs">
                           {service.category}
                         </span>
-                        <span className="inline-flex items-center px-2 py-0.5 rounded-md text-[11px] font-bold bg-[#063E38] border border-[#ECCB77] text-[#ECCB77] shadow-xs">
+                        <span className="inline-flex items-center px-2 py-0.5 rounded-md text-[11px] font-bold bg-[#063E38] border border-[#D9A62E] text-[#ECCB77] shadow-xs">
                           {service.jurisdiction}
                         </span>
                       </div>
@@ -124,20 +124,20 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
 
                     {/* Content */}
                     <div className="space-y-3 mb-6">
-                      <h3 className="text-xl font-bold text-white font-serif">
+                      <h3 className="text-xl font-bold text-[#063E38] font-serif group-hover:text-[#0A564E] transition-colors">
                         {service.title}
                       </h3>
-                      <p className="text-sm text-slate-100 leading-relaxed font-normal">
+                      <p className="text-sm text-slate-700 leading-relaxed font-normal">
                         {service.shortDescription}
                       </p>
 
-                      {/* Key Highlights (Clean embossed container) */}
-                      <div className="pt-3 border-t border-[#D9A62E]/30 space-y-2 bg-[#021512]/30 -mx-3 px-3 py-2.5 rounded-xl border border-[#D9A62E]/20">
-                        <p className="text-[11px] font-bold text-[#ECCB77] uppercase tracking-wider">Key Focus Areas:</p>
+                      {/* Key Highlights (Clean champagne inset container) */}
+                      <div className="pt-3 border-t border-[#D9A62E]/30 space-y-2 bg-[#FAF2DB]/80 -mx-3 px-3 py-2.5 rounded-xl border border-[#D9A62E]/40">
+                        <p className="text-[11px] font-bold text-[#063E38] uppercase tracking-wider">Key Focus Areas:</p>
                         <ul className="space-y-1.5">
                           {service.keyHighlights.slice(0, 3).map((hl, idx) => (
-                            <li key={idx} className="flex items-start gap-2 text-xs text-slate-100 font-medium">
-                              <Check className="w-3.5 h-3.5 text-[#ECCB77] shrink-0 mt-0.5" />
+                            <li key={idx} className="flex items-start gap-2 text-xs text-slate-800 font-medium">
+                              <Check className="w-3.5 h-3.5 text-[#063E38] shrink-0 mt-0.5" />
                               <span>{hl}</span>
                             </li>
                           ))}
@@ -146,7 +146,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
                     </div>
                   </div>
 
-                  {/* Actions (3D Buttons) */}
+                  {/* Actions (Buttons) */}
                   <div className="pt-4 border-t border-[#D9A62E]/30 flex items-center gap-3">
                     <button
                       id={`service-learn-more-${service.id}`}
@@ -154,10 +154,10 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
                         e.stopPropagation();
                         onSelectService(service.id);
                       }}
-                      className="flex-1 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-bold text-[#ECCB77] bg-gradient-to-b from-[#063E38] to-[#021815] border-2 border-[#D9A62E] shadow-[0_3px_8px_rgba(3,30,27,0.3),inset_0_1px_1px_rgba(255,255,255,0.15)] cursor-pointer"
+                      className="flex-1 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-bold text-[#063E38] bg-[#FAF2DB] hover:bg-[#F2DEAF] border-2 border-[#D9A62E] shadow-sm transition-all cursor-pointer"
                     >
                       <span>Service Guide</span>
-                      <ArrowRight className="w-3.5 h-3.5 text-[#ECCB77]" />
+                      <ArrowRight className="w-3.5 h-3.5 text-[#063E38]" />
                     </button>
 
                     <button
@@ -166,10 +166,10 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
                         e.stopPropagation();
                         onOpenConsultation(service.id);
                       }}
-                      className="flex-1 inline-flex items-center justify-center gap-1 px-4 py-2.5 rounded-xl text-xs font-bold text-[#042420] bg-gradient-to-b from-[#ECCB77] via-[#D9A62E] to-[#B8871E] border-2 border-[#FFF0C2]/80 shadow-[0_3px_8px_rgba(3,30,27,0.35),inset_0_1px_1px_rgba(255,255,255,0.3)] cursor-pointer"
+                      className="flex-1 inline-flex items-center justify-center gap-1 px-4 py-2.5 rounded-xl text-xs font-bold text-white bg-gradient-to-b from-[#063E38] to-[#042420] hover:from-[#0A4D46] hover:to-[#063E38] border-2 border-[#D9A62E] shadow-md transition-all cursor-pointer"
                     >
                       <span>Consult</span>
-                      <Calendar className="w-3.5 h-3.5 text-[#042420]" />
+                      <Calendar className="w-3.5 h-3.5 text-[#ECCB77]" />
                     </button>
                   </div>
                 </div>

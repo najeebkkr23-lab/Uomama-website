@@ -30,37 +30,37 @@ export const TestimonialsSection: React.FC = () => {
         {/* Testimonials Grid (Compact & Sleek Cards) */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
           {testimonialsData.map((item) => (
-            <div key={item.id} className="relative">
+            <div key={item.id} className="relative group">
               <div
-                className="bg-gradient-to-b from-[#0D554D] via-[#073630] to-[#031E1B] rounded-xl p-4 sm:p-5 border-2 border-[#D9A62E] shadow-[0_8px_20px_-4px_rgba(3,30,27,0.35),0_3px_8px_-2px_rgba(3,30,27,0.2),inset_0_1px_1px_rgba(255,255,255,0.2)] flex flex-col justify-between relative overflow-hidden h-full select-none"
+                className="bg-white rounded-2xl p-5 border-2 border-[#D9A62E] shadow-[0_10px_25px_-4px_rgba(4,36,32,0.12),0_4px_8px_-2px_rgba(4,36,32,0.06)] hover:shadow-[0_16px_30px_-6px_rgba(4,36,32,0.2)] transition-all duration-300 flex flex-col justify-between relative overflow-hidden h-full select-none hover:-translate-y-1"
               >
                 {/* Top 3D Metallic Edge Reflection */}
-                <div className="absolute top-0 inset-x-0 h-0.5 bg-gradient-to-r from-transparent via-[#FFF4D4]/40 to-transparent opacity-80 pointer-events-none" />
+                <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-[#D9A62E]/40 to-transparent opacity-80 pointer-events-none" />
 
-                <div className="space-y-2.5">
+                <div className="space-y-3">
                   
                   {/* Rating & Service Tag */}
                   <div className="flex items-center justify-between gap-2">
-                    <div className="flex items-center gap-0.5 text-[#ECCB77]">
+                    <div className="flex items-center gap-0.5 text-[#D9A62E]">
                       {[...Array(item.rating)].map((_, i) => (
-                        <Star key={i} className="w-3.5 h-3.5 fill-current drop-shadow-xs" />
+                        <Star key={i} className="w-4 h-4 fill-current drop-shadow-xs" />
                       ))}
                     </div>
                     {item.metric && (
-                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#021815] border border-[#D9A62E]/70 text-[#ECCB77] shadow-xs">
+                      <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-[#FAF2DB] border border-[#D9A62E] text-[#063E38] shadow-xs">
                         {item.metric}
                       </span>
                     )}
                   </div>
 
                   {/* Quote Text */}
-                  <p className="text-xs text-slate-100 leading-relaxed italic relative font-normal line-clamp-4">
+                  <p className="text-xs text-slate-700 leading-relaxed italic relative font-normal line-clamp-4">
                     "{item.quote}"
                   </p>
 
                   {/* Service Tag */}
-                  <div className="pt-1.5 border-t border-[#D9A62E]/25">
-                    <span className="text-[10px] font-bold text-[#ECCB77] uppercase tracking-wide truncate block">
+                  <div className="pt-2 border-t border-[#D9A62E]/30">
+                    <span className="text-[10.5px] font-bold text-[#063E38] uppercase tracking-wide truncate block">
                       {item.serviceUsed}
                     </span>
                   </div>
@@ -68,18 +68,18 @@ export const TestimonialsSection: React.FC = () => {
                 </div>
 
                 {/* Author Info (Compact footer) */}
-                <div className="pt-2.5 mt-2.5 border-t border-[#D9A62E]/30 flex items-center gap-2.5 bg-[#021512]/30 -mx-2 px-2.5 py-1.5 rounded-lg border border-[#D9A62E]/20">
-                  <div className="w-7 h-7 rounded-full bg-gradient-to-b from-[#073630] to-[#021714] text-[#ECCB77] flex items-center justify-center font-bold text-xs shadow-xs shrink-0 border border-[#D9A62E]">
+                <div className="pt-3 mt-3 border-t border-[#D9A62E]/30 flex items-center gap-3 bg-[#FAF2DB]/80 -mx-2 px-3 py-2 rounded-xl border border-[#D9A62E]/40">
+                  <div className="w-8 h-8 rounded-full bg-gradient-to-b from-[#063E38] to-[#03201C] text-[#ECCB77] flex items-center justify-center font-bold text-xs shadow-xs shrink-0 border border-[#D9A62E]">
                     {item.clientName.charAt(0)}
                   </div>
                   <div className="min-w-0">
-                    <h4 className="text-xs font-bold text-white leading-tight truncate">
+                    <h4 className="text-xs font-bold text-[#063E38] leading-tight truncate">
                       {item.clientName}
                     </h4>
-                    <p className="text-[10.5px] text-[#ECCB77] font-medium truncate">
+                    <p className="text-[10.5px] text-[#0A564E] font-medium truncate">
                       {item.role}
                     </p>
-                    <p className="text-[9.5px] text-slate-300 truncate">
+                    <p className="text-[9.5px] text-slate-600 truncate">
                       {item.companyOrLocation}
                     </p>
                   </div>
@@ -90,25 +90,25 @@ export const TestimonialsSection: React.FC = () => {
           ))}
         </div>
 
-        {/* Trust Badges Footer Bar with clean 3D Depth */}
+        {/* Trust Badges Footer Bar with clean Pearl White & Gold */}
         <div className="mt-14">
-          <div className="p-6 rounded-2xl bg-gradient-to-r from-[#0D554D] via-[#073630] to-[#031E1B] border-2 border-[#D9A62E] text-white flex flex-wrap items-center justify-between gap-6 shadow-[0_12px_28px_-6px_rgba(3,30,27,0.35),inset_0_1px_1px_rgba(255,255,255,0.2)]">
+          <div className="p-6 rounded-2xl bg-white border-2 border-[#D9A62E] text-[#042420] flex flex-wrap items-center justify-between gap-6 shadow-[0_12px_28px_-6px_rgba(4,36,32,0.15)]">
             <div className="flex items-center gap-3">
-              <div className="p-2 rounded-xl bg-gradient-to-b from-[#073630] to-[#021714] text-[#ECCB77] shadow-[0_3px_8px_rgba(0,0,0,0.5),inset_0_1px_1px_rgba(255,255,255,0.3)] border-2 border-[#D9A62E]/70">
+              <div className="p-2.5 rounded-xl bg-gradient-to-b from-[#063E38] to-[#03201C] text-[#ECCB77] shadow-sm border-2 border-[#D9A62E]">
                 <ShieldCheck className="w-6 h-6" />
               </div>
               <div>
-                <p className="text-sm font-bold text-white">Confidential, Compliant & Secure Operations</p>
-                <p className="text-xs text-slate-200">All corporate filings and business inquiries handled under strict data privacy protocols.</p>
+                <p className="text-sm font-bold text-[#063E38]">Confidential, Compliant & Secure Operations</p>
+                <p className="text-xs text-slate-600">All corporate filings and business inquiries handled under strict data privacy protocols.</p>
               </div>
             </div>
-            <div className="flex items-center gap-6 text-xs text-slate-100 font-medium">
+            <div className="flex items-center gap-6 text-xs text-slate-800 font-medium">
               <span className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-[#ECCB77]" />
+                <CheckCircle2 className="w-4 h-4 text-[#063E38]" />
                 Verified Secretary of State Registered Filings
               </span>
               <span className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-[#ECCB77]" />
+                <CheckCircle2 className="w-4 h-4 text-[#063E38]" />
                 Companies House Direct Integration
               </span>
             </div>

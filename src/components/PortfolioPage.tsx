@@ -191,49 +191,45 @@ export const PortfolioPage: React.FC<PortfolioPageProps> = ({
           </svg>
         </div>
 
-        {/* 9 3D Cards Grid */}
+        {/* 9 Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10">
           {clientPortfolioItems.map((item) => {
             const IconComponent = item.icon;
             return (
-              <div key={item.num} className="relative">
-                {/* 3D Back Depth Silhouette (Saya Shape) */}
-                <div className="absolute -bottom-3 left-4 right-4 h-6 bg-black/80 rounded-full blur-md pointer-events-none -z-10" />
-                <div className="absolute inset-0 bg-[#021512] rounded-2xl translate-x-1.5 translate-y-2 -z-20 opacity-80 border border-[#042420]" />
-
+              <div key={item.num} className="relative group">
                 <div
                   id={`portfolio-card-${item.num}`}
                   onClick={() => onSelectService(item.serviceKey)}
-                  className="bg-gradient-to-b from-[#0D554D] via-[#073630] to-[#031E1B] rounded-2xl p-7 relative border-2 border-[#D9A62E] shadow-[0_18px_35px_-5px_rgba(0,0,0,0.7),0_8px_16px_-6px_rgba(0,0,0,0.5),inset_0_2px_1px_rgba(255,255,255,0.25),inset_0_-2px_4px_rgba(0,0,0,0.5)] cursor-pointer flex flex-col justify-between overflow-hidden select-none"
+                  className="bg-white rounded-2xl p-7 relative border-2 border-[#D9A62E] shadow-[0_12px_28px_-4px_rgba(4,36,32,0.14),0_4px_10px_-2px_rgba(4,36,32,0.08)] hover:shadow-[0_20px_36px_-6px_rgba(4,36,32,0.22)] transition-all duration-300 cursor-pointer flex flex-col justify-between overflow-hidden select-none hover:-translate-y-1"
                 >
                   {/* Top 3D Metallic Edge Reflection */}
-                  <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-[#FFF4D4]/50 to-transparent opacity-80 pointer-events-none" />
+                  <div className="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-transparent via-[#D9A62E]/50 to-transparent opacity-80 pointer-events-none" />
 
                   {/* Gold Dot Accent Mark */}
-                  <div className="absolute top-6 right-6 w-3.5 h-3.5 rounded-full bg-[#ECCB77] shadow-[0_0_10px_rgba(236,203,119,0.9),inset_0_1px_1px_rgba(255,255,255,0.8)] border border-[#FFF3D1]" />
+                  <div className="absolute top-6 right-6 w-3.5 h-3.5 rounded-full bg-[#D9A62E] shadow-[0_0_10px_rgba(217,166,46,0.5)] border border-[#FFF3D1]" />
 
                   <div>
                     <div className="flex items-center gap-3 mb-4">
-                      <div className="w-11 h-11 rounded-xl bg-gradient-to-b from-[#073630] to-[#021714] border-2 border-[#D9A62E] flex items-center justify-center text-[#ECCB77] shadow-[0_4px_10px_rgba(0,0,0,0.6),inset_0_1px_1px_rgba(255,255,255,0.3)] shrink-0">
+                      <div className="w-11 h-11 rounded-xl bg-gradient-to-b from-[#063E38] to-[#03201C] border-2 border-[#D9A62E] flex items-center justify-center text-[#ECCB77] shadow-sm shrink-0">
                         <IconComponent className="w-5 h-5 text-[#ECCB77] shrink-0 drop-shadow-sm" />
                       </div>
-                      <span className="font-serif font-bold text-sm tracking-wider text-[#ECCB77]">
+                      <span className="font-serif font-bold text-sm tracking-wider text-[#D9A62E]">
                         {item.num}
                       </span>
                     </div>
 
-                    <h3 className="text-lg font-bold text-white font-serif leading-snug mb-3">
+                    <h3 className="text-lg font-bold text-[#063E38] font-serif leading-snug mb-3 group-hover:text-[#0A564E] transition-colors">
                       {item.title}
                     </h3>
 
-                    <p className="text-sm text-slate-100 leading-relaxed font-normal">
+                    <p className="text-sm text-slate-700 leading-relaxed font-normal">
                       {item.desc}
                     </p>
                   </div>
 
-                  <div className="pt-4 mt-4 border-t border-[#D9A62E]/30 flex items-center justify-between text-xs bg-[#021512]/40 -mx-3 px-3 py-2 rounded-xl border border-[#D9A62E]/20 shadow-[inset_0_2px_4px_rgba(0,0,0,0.4)]">
-                    <span className="font-semibold text-slate-300">Full Execution</span>
-                    <span className="font-bold text-[#ECCB77] flex items-center gap-1">
+                  <div className="pt-4 mt-4 border-t border-[#D9A62E]/30 flex items-center justify-between text-xs bg-[#FAF2DB]/80 -mx-3 px-3 py-2.5 rounded-xl border border-[#D9A62E]/40">
+                    <span className="font-semibold text-slate-700">Full Execution</span>
+                    <span className="font-bold text-[#063E38] flex items-center gap-1">
                       <span>Learn More</span>
                       <ArrowRight className="w-3.5 h-3.5" />
                     </span>

@@ -51,8 +51,8 @@ export const FaqSection: React.FC = () => {
               onClick={() => setActiveCategory(cat.id)}
               className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                 activeCategory === cat.id
-                  ? 'bg-[#031E1B] text-[#ECCB77] shadow-md border-2 border-[#D9A62E]'
-                  : 'bg-[#042420]/15 text-[#042420] border border-[#042420]/30 hover:bg-[#042420]/25'
+                  ? 'bg-gradient-to-b from-[#063E38] to-[#042420] text-[#ECCB77] shadow-md border-2 border-[#D9A62E]'
+                  : 'bg-white text-[#063E38] border-2 border-[#D9A62E]/40 hover:border-[#D9A62E] hover:bg-[#FAF2DB]'
               }`}
             >
               {cat.label}
@@ -70,8 +70,8 @@ export const FaqSection: React.FC = () => {
                 id={`faq-item-${faq.id}`}
                 className={`rounded-2xl transition-all duration-300 overflow-hidden select-none ${
                   isOpen 
-                    ? 'bg-gradient-to-b from-[#0A4740] via-[#073630] to-[#042420] border-2 border-[#D9A62E] shadow-[0_16px_36px_rgba(4,36,32,0.6),0_0_20px_rgba(217,166,46,0.25),inset_0_1px_0_rgba(255,255,255,0.15)]' 
-                    : 'bg-gradient-to-b from-[#0A4740] via-[#073630] to-[#042420] border-2 border-[#D9A62E] shadow-[0_8px_24px_rgba(4,36,32,0.4),inset_0_1px_0_rgba(255,255,255,0.1)]'
+                    ? 'bg-white border-2 border-[#D9A62E] shadow-[0_16px_32px_rgba(4,36,32,0.18)]' 
+                    : 'bg-white border-2 border-[#D9A62E] shadow-[0_6px_16px_rgba(4,36,32,0.08)] hover:shadow-[0_10px_22px_rgba(4,36,32,0.12)]'
                 }`}
               >
                 <button
@@ -79,16 +79,16 @@ export const FaqSection: React.FC = () => {
                   className="w-full flex items-center justify-between p-5 sm:p-6 text-left focus:outline-none cursor-pointer"
                   aria-expanded={isOpen}
                 >
-                  <span className="text-base font-bold text-white pr-4 font-serif">
+                  <span className="text-base font-bold text-[#063E38] pr-4 font-serif">
                     {faq.question}
                   </span>
-                  <div className={`p-1.5 rounded-lg border transition-transform duration-200 shrink-0 ${isOpen ? 'rotate-180 bg-[#031E1B] border-[#D9A62E] text-[#ECCB77]' : 'bg-[#031E1B] border-[#D9A62E]/50 text-[#ECCB77]'}`}>
+                  <div className={`p-1.5 rounded-lg border transition-transform duration-200 shrink-0 ${isOpen ? 'rotate-180 bg-[#063E38] border-[#D9A62E] text-[#ECCB77]' : 'bg-[#FAF2DB] border-[#D9A62E] text-[#063E38]'}`}>
                     <ChevronDown className="w-4 h-4" />
                   </div>
                 </button>
 
                 {isOpen && (
-                  <div className="px-5 pb-5 sm:px-6 sm:pb-6 text-sm text-slate-100 leading-relaxed border-t border-[#D9A62E]/30 pt-4 font-normal">
+                  <div className="px-5 pb-5 sm:px-6 sm:pb-6 text-sm text-slate-700 leading-relaxed border-t border-[#D9A62E]/30 pt-4 font-normal bg-[#FAF2DB]/30">
                     <p>{faq.answer}</p>
                   </div>
                 )}

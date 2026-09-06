@@ -14,19 +14,16 @@ export const BoomerangVideoBg: React.FC<BoomerangVideoBgProps> = ({
 }) => {
   return (
     <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden select-none">
-      {/* Crystal-clear, exact corporate skyline architecture backdrop - Zero delay, zero flicker */}
+      {/* Crystal-clear, exact corporate skyline architecture backdrop - Single image, zero delay, zero flicker */}
       <div className="w-full h-full scale-105 origin-center overflow-hidden relative">
-        <picture>
-          <source srcSet={imageUrl} type="image/webp" />
-          <img
-            src="/hero-bg.jpg"
-            alt="Corporate Skyline Architecture"
-            fetchPriority="high"
-            loading="eager"
-            decoding="sync"
-            className="w-full h-full object-cover object-center filter saturate-135 contrast-120 brightness-105"
-          />
-        </picture>
+        <img
+          src={imageUrl}
+          alt="Corporate Skyline Architecture"
+          fetchPriority="high"
+          loading="eager"
+          decoding="async"
+          className="w-full h-full object-cover object-center filter saturate-135 contrast-120 brightness-105"
+        />
       </div>
 
       {/* Vibrant Luxury Amber & Gold Tone Enhancer */}

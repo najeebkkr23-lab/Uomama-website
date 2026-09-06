@@ -85,30 +85,30 @@ export const WhyChooseUs: React.FC = () => {
           {benefits.map((benefit) => {
             const Icon = benefit.icon;
             return (
-              <div key={benefit.id} className="relative">
+              <div key={benefit.id} className="relative group">
                 <div
                   id={`why-us-${benefit.id}`}
-                  className="bg-gradient-to-b from-[#0D554D] via-[#073630] to-[#031E1B] rounded-2xl p-8 border-2 border-[#D9A62E] shadow-[0_10px_25px_-5px_rgba(3,30,27,0.35),0_4px_10px_-2px_rgba(3,30,27,0.2),inset_0_1px_1px_rgba(255,255,255,0.2)] flex flex-col justify-between relative overflow-hidden h-full select-none"
+                  className="bg-white rounded-2xl p-8 border-2 border-[#D9A62E] shadow-[0_12px_28px_-4px_rgba(4,36,32,0.14),0_4px_10px_-2px_rgba(4,36,32,0.08)] hover:shadow-[0_20px_36px_-6px_rgba(4,36,32,0.22)] transition-all duration-300 flex flex-col justify-between relative overflow-hidden h-full select-none hover:-translate-y-1"
                 >
                   {/* Top 3D Metallic Edge Reflection */}
-                  <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-[#FFF4D4]/40 to-transparent opacity-80 pointer-events-none" />
+                  <div className="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-transparent via-[#D9A62E]/50 to-transparent opacity-80 pointer-events-none" />
 
                   <div>
-                    <div className="w-13 h-13 rounded-xl bg-gradient-to-b from-[#073630] to-[#021714] text-[#ECCB77] flex items-center justify-center mb-6 shadow-[0_3px_8px_rgba(3,30,27,0.3),inset_0_1px_1px_rgba(255,255,255,0.25)] border-2 border-[#D9A62E] shrink-0">
+                    <div className="w-13 h-13 rounded-xl bg-gradient-to-b from-[#063E38] to-[#03201C] text-[#ECCB77] flex items-center justify-center mb-6 shadow-md border-2 border-[#D9A62E] shrink-0">
                       <Icon className="w-6 h-6 text-[#ECCB77] shrink-0 drop-shadow-xs" />
                     </div>
-                    <h3 className="text-xl font-bold text-white mb-3 font-serif">
+                    <h3 className="text-xl font-bold text-[#063E38] mb-3 font-serif group-hover:text-[#0A564E] transition-colors">
                       {benefit.title}
                     </h3>
-                    <p className="text-sm text-slate-100 leading-relaxed mb-6 font-normal">
+                    <p className="text-sm text-slate-700 leading-relaxed mb-6 font-normal">
                       {benefit.description}
                     </p>
                   </div>
 
-                  <div className="pt-4 border-t border-[#D9A62E]/30 space-y-2.5 bg-[#021512]/30 -mx-3 px-4 py-3 rounded-xl border border-[#D9A62E]/20">
+                  <div className="pt-4 border-t border-[#D9A62E]/30 space-y-2.5 bg-[#FAF2DB]/80 -mx-3 px-4 py-3 rounded-xl border border-[#D9A62E]/40">
                     {benefit.points.map((pt, idx) => (
-                      <div key={idx} className="flex items-center gap-2.5 text-xs font-semibold text-slate-100">
-                        <CheckCircle2 className="w-4 h-4 text-[#ECCB77] shrink-0" />
+                      <div key={idx} className="flex items-center gap-2.5 text-xs font-semibold text-slate-800">
+                        <CheckCircle2 className="w-4 h-4 text-[#063E38] shrink-0" />
                         <span>{pt}</span>
                       </div>
                     ))}

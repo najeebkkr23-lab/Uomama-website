@@ -60,39 +60,39 @@ export const HowItWorks: React.FC<HowItWorksProps> = ({ onOpenConsultation }) =>
           {steps.map((item, index) => {
             const Icon = item.icon;
             return (
-              <div key={index} className="relative">
+              <div key={index} className="relative group">
                 <div 
                   id={`how-it-works-step-${index + 1}`}
-                  className="relative bg-gradient-to-b from-[#0D554D] via-[#073630] to-[#031E1B] rounded-2xl p-8 border-2 border-[#D9A62E] shadow-[0_10px_25px_-5px_rgba(3,30,27,0.35),0_4px_10px_-2px_rgba(3,30,27,0.2),inset_0_1px_1px_rgba(255,255,255,0.2)] flex flex-col justify-between overflow-hidden h-full select-none"
+                  className="relative bg-white rounded-2xl p-8 border-2 border-[#D9A62E] shadow-[0_12px_28px_-4px_rgba(4,36,32,0.14),0_4px_10px_-2px_rgba(4,36,32,0.08)] hover:shadow-[0_20px_36px_-6px_rgba(4,36,32,0.22)] transition-all duration-300 flex flex-col justify-between overflow-hidden h-full select-none hover:-translate-y-1"
                 >
                   {/* Top 3D Metallic Edge Reflection */}
-                  <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-[#FFF4D4]/40 to-transparent opacity-80 pointer-events-none" />
+                  <div className="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-transparent via-[#D9A62E]/50 to-transparent opacity-80 pointer-events-none" />
 
                   <div>
                     <div className="flex items-center justify-between mb-6">
-                      <span className="text-3xl font-extrabold text-[#ECCB77] font-serif drop-shadow-xs">
+                      <span className="text-3xl font-extrabold text-[#D9A62E] font-serif drop-shadow-xs">
                         {item.step}
                       </span>
-                      <div className="w-12 h-12 rounded-xl bg-gradient-to-b from-[#073630] to-[#021714] text-[#ECCB77] flex items-center justify-center shadow-[0_3px_8px_rgba(3,30,27,0.3),inset_0_1px_1px_rgba(255,255,255,0.25)] border-2 border-[#D9A62E]">
+                      <div className="w-12 h-12 rounded-xl bg-gradient-to-b from-[#063E38] to-[#03201C] text-[#ECCB77] flex items-center justify-center shadow-md border-2 border-[#D9A62E]">
                         <Icon className="w-5 h-5" />
                       </div>
                     </div>
 
-                    <h3 className="text-lg font-bold text-white mb-1 font-serif">
+                    <h3 className="text-lg font-bold text-[#063E38] mb-1 font-serif group-hover:text-[#0A564E] transition-colors">
                       {item.title}
                     </h3>
-                    <p className="text-xs font-bold uppercase tracking-wider text-[#ECCB77] mb-4">
+                    <p className="text-xs font-bold uppercase tracking-wider text-[#D9A62E] mb-4">
                       {item.subtitle}
                     </p>
-                    <p className="text-sm text-slate-100 leading-relaxed font-normal">
+                    <p className="text-sm text-slate-700 leading-relaxed font-normal">
                       {item.description}
                     </p>
                   </div>
 
-                  <div className="mt-8 pt-4 border-t border-[#D9A62E]/30 flex items-center text-xs font-bold text-[#ECCB77] bg-[#021512]/30 -mx-3 px-3 py-2 rounded-xl border border-[#D9A62E]/20">
+                  <div className="mt-8 pt-4 border-t border-[#D9A62E]/30 flex items-center text-xs font-bold text-[#063E38] bg-[#FAF2DB]/80 -mx-3 px-3 py-2.5 rounded-xl border border-[#D9A62E]/40">
                     <span className="inline-flex items-center gap-1.5">
-                      <Sparkles className="w-3.5 h-3.5 text-[#ECCB77]" />
-                      Clear Milestones
+                      <Sparkles className="w-3.5 h-3.5 text-[#D9A62E]" />
+                      Clear Milestones & Reporting
                     </span>
                   </div>
                 </div>
