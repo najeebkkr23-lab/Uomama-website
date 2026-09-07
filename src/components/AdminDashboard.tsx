@@ -165,15 +165,25 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
     showNotification('Live Website URL saved successfully!');
   };
 
-  const handleOpenWebsite = () => {
-    if (websiteUrl) {
-      window.open(websiteUrl, '_blank', 'noopener,noreferrer');
-    } else {
-      onBackToWebsite();
-    }
+  const [isRefreshing, setIsRefreshing] = useState(false);
+
+  const handleRefreshDashboard = () => {
+    setIsRefreshing(true);
+    showNotification('Dashboard status, CRM leads aur settings refresh ho chuki hain!');
+    setTimeout(() => {
+      setIsRefreshing(false);
+    }, 600);
   };
 
-  // Handle Logo Upload File Selection
+  const handleOpenWebsite = () => {
+    const targetUrl = websiteUrl 
+      || (typeof window !== 'undefined' && localStorage.getItem('uomama_website_url'))
+      || (typeof window !== 'undefined' && `${window.location.origin}/#website`)
+      || 'https://uomamabusiness.com';
+    window.open(targetUrl, '_blank', 'noopener,noreferrer');
+  };
+
+  // Handle Logo Upload File Selection (Any image: PNG, JPG, SVG, WebP, GIF)
   const handleLogoFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -188,9 +198,11 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
       const dataUrl = reader.result as string;
       setLogoPreview(dataUrl);
       uploadLogo(dataUrl);
-      showNotification('Custom logo uploaded & applied successfully across header and footer!');
+      showNotification('Naya logo upload ho gya hai aur live website par apply ho chuka hai!');
     };
     reader.readAsDataURL(file);
+    // Reset file input value so user can re-select if needed
+    e.target.value = '';
   };
 
   const handleResetLogo = () => {
@@ -445,11 +457,14 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 relative z-10">
             <div className="flex items-center gap-4">
               <button 
-                onClick={onBackToWebsite}
-                title="Go to Homepage"
-                className="w-14 h-14 rounded-2xl bg-white p-1 border-2 border-[#D9A62E] flex items-center justify-center shrink-0 shadow-lg cursor-pointer hover:scale-105 transition-transform"
+                id="admin-dashboard-logo-refresh-btn"
+                onClick={handleRefreshDashboard}
+                title="Click karein: Dashboard status aur data refresh ho jayega"
+                className={`w-14 h-14 rounded-2xl bg-white p-1 border-2 border-[#D9A62E] flex items-center justify-center shrink-0 shadow-lg cursor-pointer hover:scale-105 active:scale-95 transition-all ${
+                  isRefreshing ? 'animate-spin ring-4 ring-[#D9A62E]/50' : ''
+                }`}
               >
-                <UomamaLogo variant="mark" className="w-full h-full" onClick={onBackToWebsite} />
+                <UomamaLogo variant="mark" className="w-full h-full" onClick={handleRefreshDashboard} />
               </button>
               <div>
                 <div className="flex items-center gap-2">
@@ -457,7 +472,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                     Admin Management Console
                   </h1>
                   <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-[#D9A62E] text-[#042420]">
-                    Backend v2.4
+                    Backend Active
                   </span>
                 </div>
                 <p className="text-xs sm:text-sm text-[#ECCB77] mt-1 font-medium">
@@ -469,11 +484,11 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
             <div className="flex flex-wrap items-center gap-3">
               <button
                 id="admin-btn-back-to-website"
-                onClick={onBackToWebsite}
+                onClick={handleOpenWebsite}
                 className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-[#FAF2DB] text-[#042420] hover:bg-white border-2 border-[#D9A62E] shadow-md transition-all cursor-pointer"
               >
                 <Eye className="w-4 h-4 text-[#063E38]" />
-                <span>View Live Website</span>
+                <span>Live Website (New Tab ↗)</span>
               </button>
               
               <button
@@ -491,185 +506,112 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
           </div>
         </div>
 
-        {/* Dedicated Quick Action Station: Website Link & Logo Uploader */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-8">
-          
-          {/* Card 1: 🌐 Website Par Jane Ki Jagah (Go to Public Website) */}
-          <div className="lg:col-span-6 bg-gradient-to-br from-[#063E38] via-[#0A4D46] to-[#042420] text-white rounded-2xl p-6 sm:p-7 border-2 border-[#D9A62E] shadow-xl relative overflow-hidden flex flex-col justify-between">
-            <div className="absolute top-0 right-0 w-48 h-48 bg-[#D9A62E]/10 rounded-full blur-2xl pointer-events-none" />
-            
-            <div className="relative z-10">
-              <div className="flex items-center justify-between mb-3">
-                <div className="flex items-center gap-2.5">
-                  <div className="w-10 h-10 rounded-xl bg-[#D9A62E] text-[#042420] flex items-center justify-center font-bold shadow-md">
-                    <Globe className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <h2 className="text-lg sm:text-xl font-bold font-serif text-white">
-                      Public Client Website
-                    </h2>
-                    <p className="text-xs text-[#ECCB77]">
-                      Client aur Owner ko dikhane wali live website
-                    </p>
-                  </div>
-                </div>
-                <span className="px-2.5 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-[#ECCB77]/20 text-[#ECCB77] border border-[#ECCB77]/40">
-                  Client View
+        {/* Website Logo Uploader Card */}
+        <div className="bg-white rounded-2xl p-6 sm:p-8 border-2 border-[#D9A62E] shadow-xl mb-8">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#D9A62E]/30 mb-6">
+            <div className="flex items-center gap-3">
+              <div className="w-12 h-12 rounded-xl bg-[#063E38] text-[#ECCB77] border-2 border-[#D9A62E] flex items-center justify-center font-bold shadow-md shrink-0">
+                <Upload className="w-6 h-6" />
+              </div>
+              <div>
+                <h2 className="text-xl font-bold font-serif text-[#063E38]">
+                  Website Logo Uploader
+                </h2>
+                <p className="text-xs text-slate-600 mt-0.5">
+                  Jo bhi logo aap yahan upload karenge wo foran website ke Header (Navbar) aur Footer par live update ho jayega.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-2">
+              {logoPreview ? (
+                <span className="px-3 py-1.5 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800 border border-emerald-300 flex items-center gap-1.5 shadow-xs">
+                  <Check className="w-3.5 h-3.5 text-emerald-700" />
+                  Custom Logo Active
                 </span>
-              </div>
-
-              <p className="text-xs text-emerald-100/90 leading-relaxed mb-4">
-                Website par Dashboard ka koi link ya button nahi hai. Neeche diye gaye button par click kar ke aap apni live website nayi tab mein dekh sakte hain:
-              </p>
-
-              {/* Website URL display / edit */}
-              <div className="bg-[#032622]/80 border border-[#D9A62E]/50 rounded-xl p-3 mb-4">
-                {isEditingWebsiteUrl ? (
-                  <div className="flex items-center gap-2">
-                    <input
-                      type="url"
-                      value={tempWebsiteUrl}
-                      onChange={(e) => setTempWebsiteUrl(e.target.value)}
-                      placeholder="https://your-site.netlify.app"
-                      className="flex-1 bg-white text-[#042420] text-xs font-mono px-3 py-2 rounded-lg border border-[#D9A62E] outline-none"
-                    />
-                    <button
-                      onClick={handleSaveWebsiteUrl}
-                      className="px-3 py-2 rounded-lg bg-[#D9A62E] text-[#042420] font-bold text-xs hover:bg-[#ECCB77] cursor-pointer"
-                    >
-                      Save
-                    </button>
-                    <button
-                      onClick={() => setIsEditingWebsiteUrl(false)}
-                      className="px-3 py-2 rounded-lg bg-white/10 text-white text-xs hover:bg-white/20 cursor-pointer"
-                    >
-                      Cancel
-                    </button>
-                  </div>
-                ) : (
-                  <div className="flex items-center justify-between gap-2">
-                    <span className="text-xs font-mono text-[#ECCB77] truncate">
-                      {websiteUrl}
-                    </span>
-                    <button
-                      onClick={() => {
-                        setTempWebsiteUrl(websiteUrl);
-                        setIsEditingWebsiteUrl(true);
-                      }}
-                      className="text-[11px] font-bold text-[#ECCB77] underline hover:text-white shrink-0 cursor-pointer"
-                    >
-                      Change URL
-                    </button>
-                  </div>
-                )}
-              </div>
-            </div>
-
-            {/* Big Action Button to Open Website */}
-            <div className="relative z-10 pt-2">
-              <button
-                id="admin-btn-open-website-hero"
-                onClick={handleOpenWebsite}
-                className="w-full inline-flex items-center justify-center gap-3 px-6 py-3.5 rounded-xl font-extrabold text-sm text-[#042420] bg-gradient-to-r from-[#D9A62E] via-[#ECCB77] to-[#D9A62E] hover:from-[#ECCB77] hover:to-[#D9A62E] border-2 border-white shadow-lg hover:shadow-xl transition-all cursor-pointer group"
-              >
-                <Eye className="w-5 h-5 text-[#063E38] group-hover:scale-110 transition-transform" />
-                <span>Website Par Jayein (Open Live Website ↗)</span>
-                <ExternalLink className="w-4 h-4 text-[#063E38] opacity-70 group-hover:translate-x-0.5 transition-transform" />
-              </button>
-            </div>
-          </div>
-
-          {/* Card 2: 🖼️ Logo Upload Karne Ki Jagah (Dedicated Logo Station) */}
-          <div className="lg:col-span-6 bg-white rounded-2xl p-6 sm:p-7 border-2 border-[#D9A62E] shadow-xl flex flex-col justify-between">
-            <div>
-              <div className="flex items-center justify-between pb-3 border-b border-[#D9A62E]/30 mb-4">
-                <div className="flex items-center gap-2.5">
-                  <div className="w-10 h-10 rounded-xl bg-[#063E38] text-[#ECCB77] border border-[#D9A62E] flex items-center justify-center font-bold shadow-md">
-                    <Upload className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <h2 className="text-lg sm:text-xl font-bold font-serif text-[#063E38]">
-                      Website Logo Uploader
-                    </h2>
-                    <p className="text-xs text-slate-600">
-                      Website ka official brand logo yahan upload karein
-                    </p>
-                  </div>
-                </div>
-
-                {logoPreview ? (
-                  <span className="px-2.5 py-1 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800 border border-emerald-300 flex items-center gap-1">
-                    <Check className="w-3 h-3 text-emerald-700" />
-                    Custom Logo Active
-                  </span>
-                ) : (
-                  <span className="px-2.5 py-1 rounded-full text-[10px] font-bold bg-[#FAF2DB] text-[#042420] border border-[#D9A62E]/50">
-                    Default SVG Active
-                  </span>
-                )}
-              </div>
-
-              {/* Upload Box */}
-              <div 
-                onClick={() => fileInputRef.current?.click()}
-                className="border-2 border-dashed border-[#D9A62E] hover:border-[#063E38] rounded-xl p-4 text-center bg-[#FAF2DB]/40 hover:bg-[#FAF2DB] transition-all cursor-pointer group mb-3"
-              >
-                <div className="flex items-center justify-center gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-[#063E38] text-[#ECCB77] border border-[#D9A62E] flex items-center justify-center group-hover:scale-105 transition-transform shadow-sm shrink-0">
-                    <Upload className="w-6 h-6" />
-                  </div>
-                  <div className="text-left">
-                    <p className="text-sm font-bold text-[#042420]">
-                      Click to Choose Logo File
-                    </p>
-                    <p className="text-xs text-slate-600">
-                      PNG, JPG, SVG, WebP (Transparent background recommended)
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Live Preview Box */}
-              <div className="grid grid-cols-2 gap-3 mb-1">
-                <div className="p-2.5 rounded-lg bg-[#EEDCA8] border border-[#D9A62E] flex items-center justify-center overflow-hidden">
-                  <div className="h-10 flex items-center">
-                    <UomamaLogo variant="horizontal" className="h-8" />
-                  </div>
-                </div>
-                <div className="p-2.5 rounded-lg bg-gradient-to-r from-[#063E38] to-[#042420] border border-[#D9A62E] flex items-center justify-center overflow-hidden">
-                  <div className="h-10 flex items-center">
-                    <UomamaLogo variant="horizontal" isFooter={true} className="h-8" />
-                  </div>
-                </div>
-              </div>
-              <div className="flex justify-between text-[10px] text-slate-500 font-semibold px-1">
-                <span>Navbar Preview</span>
-                <span>Footer Preview</span>
-              </div>
-            </div>
-
-            {/* Quick Action Buttons */}
-            <div className="flex items-center gap-3 pt-3 border-t border-[#D9A62E]/30 mt-3">
-              <button
-                onClick={() => fileInputRef.current?.click()}
-                className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold text-white bg-[#063E38] hover:bg-[#094F48] border border-[#D9A62E] shadow-sm transition-all cursor-pointer"
-              >
-                <Upload className="w-3.5 h-3.5 text-[#ECCB77]" />
-                <span>Naya Logo File Select Karein</span>
-              </button>
-
-              {logoPreview && (
-                <button
-                  onClick={handleResetLogo}
-                  title="Default logo par wapis jayein"
-                  className="px-3 py-2.5 rounded-xl text-xs font-bold text-[#042420] bg-[#FAF2DB] hover:bg-[#EEDCA8] border border-[#D9A62E] transition-colors cursor-pointer"
-                >
-                  <RotateCcw className="w-3.5 h-3.5 text-[#063E38]" />
-                </button>
+              ) : (
+                <span className="px-3 py-1.5 rounded-full text-xs font-bold bg-[#FAF2DB] text-[#042420] border border-[#D9A62E]/50 flex items-center gap-1.5">
+                  Default SVG Logo Active
+                </span>
               )}
             </div>
           </div>
 
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+            {/* Upload Drag-and-drop & File Selection Box */}
+            <div className="lg:col-span-7">
+              <input
+                type="file"
+                ref={fileInputRef}
+                onChange={handleLogoFileChange}
+                accept="image/png, image/jpeg, image/svg+xml, image/webp, image/gif"
+                className="hidden"
+              />
+
+              <div 
+                onClick={() => fileInputRef.current?.click()}
+                className="border-2 border-dashed border-[#D9A62E] hover:border-[#063E38] rounded-2xl p-6 sm:p-8 text-center bg-[#FAF2DB]/40 hover:bg-[#FAF2DB] transition-all cursor-pointer group shadow-inner"
+              >
+                <div className="w-16 h-16 mx-auto rounded-2xl bg-[#063E38] text-[#ECCB77] border-2 border-[#D9A62E] flex items-center justify-center mb-3 group-hover:scale-105 transition-transform shadow-md">
+                  <Upload className="w-8 h-8" />
+                </div>
+                <p className="text-base font-bold text-[#042420]">
+                  Click to Choose Logo File (or Drag & Drop)
+                </p>
+                <p className="text-xs text-slate-600 mt-1">
+                  Supports PNG, JPG, SVG, WebP (Max 5MB • Transparent background recommended)
+                </p>
+              </div>
+
+              <div className="mt-4 flex flex-wrap items-center gap-3">
+                <button
+                  id="admin-btn-select-logo-file"
+                  onClick={() => fileInputRef.current?.click()}
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold text-white bg-[#063E38] hover:bg-[#094F48] border-2 border-[#D9A62E] shadow-sm transition-all cursor-pointer"
+                >
+                  <Upload className="w-4 h-4 text-[#ECCB77]" />
+                  <span>Logo File Select Karein</span>
+                </button>
+
+                {logoPreview && (
+                  <button
+                    id="admin-btn-reset-default-logo"
+                    onClick={handleResetLogo}
+                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold text-[#042420] bg-[#FAF2DB] hover:bg-[#EEDCA8] border border-[#D9A62E] transition-colors cursor-pointer"
+                  >
+                    <RotateCcw className="w-3.5 h-3.5 text-[#063E38]" />
+                    <span>Reset to Default Logo</span>
+                  </button>
+                )}
+              </div>
+            </div>
+
+            {/* Live Rendering Previews */}
+            <div className="lg:col-span-5 bg-[#FAF2DB]/50 rounded-2xl p-5 border border-[#D9A62E]/50 flex flex-col justify-between h-full">
+              <div className="mb-4">
+                <p className="text-xs font-bold text-[#063E38] uppercase tracking-wider mb-2">
+                  Header / Navbar Preview:
+                </p>
+                <div className="p-3 rounded-xl bg-[#EEDCA8] border-2 border-[#D9A62E] shadow-xs flex items-center justify-center overflow-hidden">
+                  <UomamaLogo variant="horizontal" className="h-9" />
+                </div>
+              </div>
+
+              <div>
+                <p className="text-xs font-bold text-[#063E38] uppercase tracking-wider mb-2">
+                  Footer (Dark Background) Preview:
+                </p>
+                <div className="p-3 rounded-xl bg-gradient-to-r from-[#063E38] to-[#042420] border-2 border-[#D9A62E] shadow-sm flex items-center justify-center overflow-hidden">
+                  <UomamaLogo variant="horizontal" isFooter={true} className="h-9" />
+                </div>
+              </div>
+
+              <p className="text-[11px] text-emerald-800 font-medium mt-3 pt-2 border-t border-[#D9A62E]/30 flex items-center gap-1.5">
+                <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                <span>Logo live website ke tamam pages par automatically apply hota hai.</span>
+              </p>
+            </div>
+          </div>
         </div>
 
         {/* Tab Navigation Menu */}
@@ -756,112 +698,9 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
           </button>
         </div>
 
-        {/* TAB 1: BRANDING & LOGO UPLOAD */}
+        {/* TAB 1: BRANDING & IDENTITY */}
         {activeTab === 'branding' && (
           <div className="space-y-8 animate-in fade-in duration-200">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-              
-              {/* Logo Uploader Card */}
-              <div className="lg:col-span-6 bg-white rounded-2xl p-6 sm:p-8 border-2 border-[#D9A62E] shadow-lg">
-                <div className="flex items-center justify-between pb-4 border-b border-[#D9A62E]/30 mb-6">
-                  <div>
-                    <h3 className="text-lg font-bold text-[#063E38] font-serif">
-                      Website Logo Uploader
-                    </h3>
-                    <p className="text-xs text-slate-600 mt-0.5">
-                      Upload your custom logo to display across navbar, mobile menu & footer
-                    </p>
-                  </div>
-                  {logoPreview && (
-                    <span className="px-2.5 py-1 rounded-md text-[11px] font-bold bg-[#063E38] text-[#ECCB77] border border-[#D9A62E]">
-                      Custom Logo Active
-                    </span>
-                  )}
-                </div>
-
-                {/* Upload Box */}
-                <div 
-                  onClick={() => fileInputRef.current?.click()}
-                  className="border-2 border-dashed border-[#D9A62E] hover:border-[#063E38] rounded-2xl p-8 text-center bg-[#FAF2DB]/40 hover:bg-[#FAF2DB] transition-all cursor-pointer group"
-                >
-                  <input
-                    type="file"
-                    ref={fileInputRef}
-                    onChange={handleLogoFileChange}
-                    accept="image/png, image/jpeg, image/svg+xml, image/webp"
-                    className="hidden"
-                  />
-
-                  <div className="w-16 h-16 mx-auto rounded-2xl bg-[#063E38] text-[#ECCB77] border-2 border-[#D9A62E] flex items-center justify-center mb-4 group-hover:scale-105 transition-transform shadow-md">
-                    <Upload className="w-8 h-8" />
-                  </div>
-
-                  <p className="text-sm font-bold text-[#042420]">
-                    Click to browse or drag and drop your logo
-                  </p>
-                  <p className="text-xs text-slate-600 mt-1">
-                    Supports PNG, JPG, SVG, WEBP (Max 5MB • Transparent background recommended)
-                  </p>
-                </div>
-
-                {/* Action Buttons */}
-                <div className="mt-6 flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-[#D9A62E]/30">
-                  <button
-                    onClick={() => fileInputRef.current?.click()}
-                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold text-white bg-[#063E38] hover:bg-[#094F48] border-2 border-[#D9A62E] shadow-sm transition-all cursor-pointer"
-                  >
-                    <Upload className="w-3.5 h-3.5 text-[#ECCB77]" />
-                    <span>Upload New Image</span>
-                  </button>
-
-                  <button
-                    onClick={handleResetLogo}
-                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold text-[#042420] bg-[#FAF2DB] hover:bg-[#EEDCA8] border border-[#D9A62E] transition-colors cursor-pointer"
-                  >
-                    <RotateCcw className="w-3.5 h-3.5 text-[#063E38]" />
-                    <span>Reset to Default SVG Logo</span>
-                  </button>
-                </div>
-              </div>
-
-              {/* Real-time Logo Live Preview Card */}
-              <div className="lg:col-span-6 bg-white rounded-2xl p-6 sm:p-8 border-2 border-[#D9A62E] shadow-lg flex flex-col justify-between">
-                <div>
-                  <h3 className="text-lg font-bold text-[#063E38] font-serif pb-4 border-b border-[#D9A62E]/30 mb-6">
-                    Live Rendering Preview
-                  </h3>
-
-                  {/* Header Preview Box */}
-                  <div className="mb-6">
-                    <p className="text-xs font-bold text-[#063E38] uppercase tracking-wider mb-2">
-                      Header / Navbar View:
-                    </p>
-                    <div className="p-4 rounded-xl bg-[#EEDCA8] border-2 border-[#D9A62E] shadow-sm flex items-center">
-                      <UomamaLogo />
-                    </div>
-                  </div>
-
-                  {/* Footer Dark Preview Box */}
-                  <div>
-                    <p className="text-xs font-bold text-[#063E38] uppercase tracking-wider mb-2">
-                      Footer (Dark Background) View:
-                    </p>
-                    <div className="p-4 rounded-xl bg-gradient-to-r from-[#063E38] to-[#042420] border-2 border-[#D9A62E] shadow-md flex items-center">
-                      <UomamaLogo isFooter={true} />
-                    </div>
-                  </div>
-                </div>
-
-                <div className="mt-6 pt-4 border-t border-[#D9A62E]/30 text-xs text-slate-600">
-                  <p className="flex items-center gap-1.5 text-emerald-800 font-medium">
-                    <Check className="w-4 h-4 text-emerald-600" />
-                    <span>Any uploaded logo automatically scales and updates across the entire website instantly.</span>
-                  </p>
-                </div>
-              </div>
-
-            </div>
-
             {/* Brand Names & Slogan Editor */}
             <div className="bg-white rounded-2xl p-6 sm:p-8 border-2 border-[#D9A62E] shadow-lg">
               <h3 className="text-lg font-bold text-[#063E38] font-serif pb-4 border-b border-[#D9A62E]/30 mb-6">

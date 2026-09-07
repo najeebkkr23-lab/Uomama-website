@@ -271,14 +271,14 @@ export default function App() {
             <button
               id="admin-preview-website-btn"
               onClick={() => {
-                setCurrentView('home');
-                window.location.hash = 'website';
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+                const targetUrl = (typeof window !== 'undefined' && localStorage.getItem('uomama_website_url')) 
+                  || (typeof window !== 'undefined' && `${window.location.origin}/#website`)
+                  || 'https://uomamabusiness.com';
+                window.open(targetUrl, '_blank', 'noopener,noreferrer');
               }}
               className="px-3.5 py-1.5 rounded-lg bg-[#063E38] hover:bg-[#0A4D46] text-[#ECCB77] border border-[#D9A62E] transition-all cursor-pointer flex items-center gap-1.5 shadow-sm text-xs font-bold"
             >
-              <span>Preview Public Website</span>
-              <span className="text-[#D9A62E]">→</span>
+              <span>Live Website (New Tab ↗)</span>
             </button>
           </div>
         </header>
@@ -286,9 +286,10 @@ export default function App() {
         <div className="flex-1">
           <AdminDashboard
             onBackToWebsite={() => {
-              setCurrentView('home');
-              window.location.hash = 'website';
-              window.scrollTo({ top: 0, behavior: 'smooth' });
+              const targetUrl = (typeof window !== 'undefined' && localStorage.getItem('uomama_website_url')) 
+                || (typeof window !== 'undefined' && `${window.location.origin}/#website`)
+                || 'https://uomamabusiness.com';
+              window.open(targetUrl, '_blank', 'noopener,noreferrer');
             }}
             onNavigateToService={handleSelectService}
           />
@@ -422,23 +423,6 @@ export default function App() {
         type={activePolicyModal}
         onClose={() => setActivePolicyModal(null)}
       />
-
-      {/* Quick Admin Dashboard Switcher Button */}
-      <div className="fixed bottom-5 right-5 z-40">
-        <button
-          id="floating-admin-dashboard-btn"
-          onClick={() => {
-            setCurrentView('admin');
-            window.location.hash = 'admin';
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          }}
-          className="flex items-center gap-2 px-4 py-2.5 rounded-full font-bold text-xs text-white bg-gradient-to-b from-[#063E38] to-[#031E1B] border-2 border-[#D9A62E] shadow-2xl hover:scale-105 transition-all cursor-pointer hover:border-[#ECCB77] group"
-          title="Open Admin Dashboard"
-        >
-          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-          <span>Admin Dashboard</span>
-        </button>
-      </div>
     </div>
   );
 }
