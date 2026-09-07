@@ -23,11 +23,15 @@ import { servicesData } from './data/services';
 import { useSiteSettings } from './context/SiteSettingsContext';
 
 export default function App() {
-  // Detect if deployed on Railway or running in Admin mode
+  // Detect if deployed on Railway
   const isRailway = typeof window !== 'undefined' && (
     window.location.hostname.includes('railway.app') ||
     window.location.hostname.includes('railway')
   );
+
+  const hostname = typeof window !== 'undefined' ? window.location.hostname.toLowerCase() : '';
+  const isWebsiteDomain = hostname.includes('website') || hostname.includes('client') || hostname.includes('preview');
+  const isAdminDomain = hostname.includes('admin') || hostname.includes('dash');
 
   const getInitialView = (): AppView => {
     if (typeof window === 'undefined') return 'home';
@@ -38,6 +42,27 @@ export default function App() {
 
     // Explicit request to view website
     if (hash === 'website' || hash === 'site' || hash === 'home') {
+      return 'home';
+    }
+
+    // Explicit website configuration (for owner website deployment)
+    if (
+      import.meta.env.VITE_APP_MODE === 'website' ||
+      import.meta.env.VITE_APP_MODE === 'site' ||
+      import.meta.env.VITE_DEFAULT_VIEW === 'website' ||
+      import.meta.env.VITE_DEFAULT_VIEW === 'home' ||
+      isWebsiteDomain
+    ) {
+      if (
+        hash === 'admin' ||
+        hash === 'dashboard' ||
+        path === '/admin' ||
+        path.startsWith('/admin') ||
+        search.includes('view=admin') ||
+        search.includes('admin=true')
+      ) {
+        return 'admin';
+      }
       return 'home';
     }
 
@@ -53,12 +78,13 @@ export default function App() {
       search.includes('admin=true') ||
       search.includes('dashboard=true') ||
       import.meta.env.VITE_APP_MODE === 'admin' ||
-      import.meta.env.VITE_DEFAULT_VIEW === 'admin'
+      import.meta.env.VITE_DEFAULT_VIEW === 'admin' ||
+      isAdminDomain
     ) {
       return 'admin';
     }
 
-    // When deployed on Railway, automatically launch Admin Dashboard from start!
+    // When deployed on Railway with no explicit website flag, default to Admin Dashboard
     if (isRailway) {
       return 'admin';
     }
@@ -86,7 +112,7 @@ export default function App() {
       const path = window.location.pathname.toLowerCase();
       const search = window.location.search.toLowerCase();
 
-      // If user specifically wants to preview the public website
+      // If user specifically wants to view the public website
       if (hash === 'website' || hash === 'site') {
         setCurrentView('home');
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -104,15 +130,24 @@ export default function App() {
         search.includes('view=admin') ||
         search.includes('admin=true') ||
         search.includes('dashboard=true') ||
-        import.meta.env.VITE_APP_MODE === 'admin'
+        import.meta.env.VITE_APP_MODE === 'admin' ||
+        isAdminDomain
       ) {
         setCurrentView('admin');
         window.scrollTo({ top: 0, behavior: 'smooth' });
         return;
       }
 
-      // On Railway: if no hash is provided, default to Admin Dashboard
-      if (isRailway && !hash) {
+      // If website service or domain
+      if (import.meta.env.VITE_APP_MODE === 'website' || isWebsiteDomain) {
+        if (!hash || hash === 'home' || hash === 'hero') {
+          setCurrentView('home');
+          return;
+        }
+      }
+
+      // On generic Railway deployment: if no hash is provided, default to Admin Dashboard
+      if (isRailway && !hash && !isWebsiteDomain && import.meta.env.VITE_APP_MODE !== 'website') {
         setCurrentView('admin');
         return;
       }

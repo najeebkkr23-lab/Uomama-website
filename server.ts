@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import path from "path";
+import fs from "fs";
 import { createServer as createViteServer } from "vite";
 import { GoogleGenAI } from "@google/genai";
 import dotenv from "dotenv";
@@ -779,22 +780,27 @@ Select your formation package in our Instant Configurator to receive expedited f
 
 // Start Server & Integrate Vite
 async function start() {
-  if (process.env.NODE_ENV !== "production") {
+  const distPath = path.join(process.cwd(), "dist");
+  const hasDist = fs.existsSync(path.join(distPath, "index.html"));
+
+  // If built dist exists or NODE_ENV is production, always serve production build
+  if (hasDist || process.env.NODE_ENV === "production") {
+    console.log(`[Production] Serving static files from ${distPath}`);
+    app.use(express.static(distPath));
+    app.get("*", (req, res) => {
+      res.sendFile(path.join(distPath, "index.html"));
+    });
+  } else {
+    console.log("[Development] Initializing Vite middleware...");
     const vite = await createViteServer({
       server: { middlewareMode: true },
       appType: "spa",
     });
     app.use(vite.middlewares);
-  } else {
-    const distPath = path.join(process.cwd(), "dist");
-    app.use(express.static(distPath));
-    app.get("*", (req, res) => {
-      res.sendFile(path.join(distPath, "index.html"));
-    });
   }
 
   app.listen(PORT, "0.0.0.0", () => {
-    console.log(`ApexGlobal Tax & Formation server running on http://0.0.0.0:${PORT}`);
+    console.log(`Uomama Business Solutions server running on http://0.0.0.0:${PORT}`);
   });
 }
 
