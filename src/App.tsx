@@ -23,27 +23,50 @@ import { servicesData } from './data/services';
 import { useSiteSettings } from './context/SiteSettingsContext';
 
 export default function App() {
-  // Detect if explicitly in Admin mode via path, hash, or environment variable
-  const isDedicatedAdminMode = typeof window !== 'undefined' && (
-    import.meta.env.VITE_APP_MODE === 'admin' ||
-    window.location.pathname === '/admin' ||
-    window.location.pathname.startsWith('/admin/') ||
-    window.location.hash === '#admin'
+  // Detect if deployed on Railway or running in Admin mode
+  const isRailway = typeof window !== 'undefined' && (
+    window.location.hostname.includes('railway.app') ||
+    window.location.hostname.includes('railway')
   );
 
-  const [currentView, setCurrentView] = useState<AppView>(() => {
-    if (typeof window !== 'undefined') {
-      if (
-        import.meta.env.VITE_APP_MODE === 'admin' ||
-        window.location.pathname === '/admin' ||
-        window.location.pathname.startsWith('/admin/') ||
-        window.location.hash === '#admin'
-      ) {
-        return 'admin';
-      }
+  const getInitialView = (): AppView => {
+    if (typeof window === 'undefined') return 'home';
+
+    const hash = window.location.hash.replace('#', '').toLowerCase();
+    const path = window.location.pathname.toLowerCase();
+    const search = window.location.search.toLowerCase();
+
+    // Explicit request to view website
+    if (hash === 'website' || hash === 'site' || hash === 'home') {
+      return 'home';
     }
+
+    // Explicit admin triggers (hash, path, query param, or env)
+    if (
+      hash === 'admin' ||
+      hash === 'dashboard' ||
+      path === '/admin' ||
+      path.startsWith('/admin') ||
+      path === '/dashboard' ||
+      path.startsWith('/dashboard') ||
+      search.includes('view=admin') ||
+      search.includes('admin=true') ||
+      search.includes('dashboard=true') ||
+      import.meta.env.VITE_APP_MODE === 'admin' ||
+      import.meta.env.VITE_DEFAULT_VIEW === 'admin'
+    ) {
+      return 'admin';
+    }
+
+    // When deployed on Railway, automatically launch Admin Dashboard from start!
+    if (isRailway) {
+      return 'admin';
+    }
+
     return 'home';
-  });
+  };
+
+  const [currentView, setCurrentView] = useState<AppView>(getInitialView);
 
   const [isConsultationModalOpen, setIsConsultationModalOpen] = useState(false);
   const [selectedServiceForModal, setSelectedServiceForModal] = useState<ServiceType | 'general-consultation'>('usa-tax');
@@ -59,25 +82,42 @@ export default function App() {
   // Synchronize with URL hash or path for clean client navigation and bookmarking
   useEffect(() => {
     const handleNavigation = () => {
-      // If environment variable explicitly sets admin mode
-      if (import.meta.env.VITE_APP_MODE === 'admin') {
-        setCurrentView('admin');
+      const hash = window.location.hash.replace('#', '').toLowerCase();
+      const path = window.location.pathname.toLowerCase();
+      const search = window.location.search.toLowerCase();
+
+      // If user specifically wants to preview the public website
+      if (hash === 'website' || hash === 'site') {
+        setCurrentView('home');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
         return;
       }
 
-      const hash = window.location.hash.replace('#', '');
-      const path = window.location.pathname.toLowerCase();
-      
+      // Explicit admin triggers
       if (
         hash === 'admin' || 
         hash === 'dashboard' || 
         path === '/admin' || 
-        path.startsWith('/admin')
+        path.startsWith('/admin') ||
+        path === '/dashboard' ||
+        path.startsWith('/dashboard') ||
+        search.includes('view=admin') ||
+        search.includes('admin=true') ||
+        search.includes('dashboard=true') ||
+        import.meta.env.VITE_APP_MODE === 'admin'
       ) {
         setCurrentView('admin');
         window.scrollTo({ top: 0, behavior: 'smooth' });
         return;
-      } else if (hash.startsWith('service-')) {
+      }
+
+      // On Railway: if no hash is provided, default to Admin Dashboard
+      if (isRailway && !hash) {
+        setCurrentView('admin');
+        return;
+      }
+
+      if (hash.startsWith('service-')) {
         const serviceId = hash.replace('service-', '') as ServiceType;
         const exists = servicesData.some((s) => s.id === serviceId);
         if (exists) {
@@ -98,7 +138,9 @@ export default function App() {
         window.scrollTo({ top: 0, behavior: 'smooth' });
         return;
       } else if (hash === 'home' || hash === '' || hash === 'hero') {
-        setCurrentView('home');
+        if (!isRailway) {
+          setCurrentView('home');
+        }
         return;
       }
     };
@@ -110,7 +152,7 @@ export default function App() {
       window.removeEventListener('hashchange', handleNavigation);
       window.removeEventListener('popstate', handleNavigation);
     };
-  }, []);
+  }, [isRailway]);
 
   const handleNavigate = (target: string) => {
     if (target === 'admin' || target === 'dashboard' || target === 'backend') {
@@ -177,14 +219,45 @@ export default function App() {
   // Dedicated Standalone Admin Console View (For Railway Deployment)
   if (currentView === 'admin') {
     return (
-      <div className="min-h-screen bg-[#F7F3EB] text-[#042420] antialiased">
-        <AdminDashboard
-          onBackToWebsite={() => {
-            const savedUrl = (typeof window !== 'undefined' && localStorage.getItem('uomama_website_url')) || import.meta.env.VITE_FRONTEND_URL || 'https://uomamabusiness.com';
-            window.open(savedUrl, '_blank');
-          }}
-          onNavigateToService={handleSelectService}
-        />
+      <div className="min-h-screen bg-[#F7F3EB] text-[#042420] antialiased flex flex-col">
+        {/* Railway Status & Seamless Website Switcher Header */}
+        <header className="bg-[#031E1B] text-[#ECCB77] border-b-2 border-[#D9A62E] px-4 py-2.5 flex items-center justify-between text-xs font-bold shadow-md sticky top-0 z-50">
+          <div className="flex items-center gap-2.5">
+            <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse ring-2 ring-emerald-400/30" />
+            <span className="tracking-wide">
+              {isRailway ? "Railway Deployment: Admin Dashboard Active" : "Uomama Business Solutions • Management Console"}
+            </span>
+            <span className="hidden md:inline-block px-2 py-0.5 rounded-sm bg-[#063E38] text-[10px] text-slate-300 border border-[#D9A62E]/40 font-mono">
+              Live Leads & SEO Hub
+            </span>
+          </div>
+
+          <div className="flex items-center gap-3">
+            <button
+              id="admin-preview-website-btn"
+              onClick={() => {
+                setCurrentView('home');
+                window.location.hash = 'website';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              className="px-3.5 py-1.5 rounded-lg bg-[#063E38] hover:bg-[#0A4D46] text-[#ECCB77] border border-[#D9A62E] transition-all cursor-pointer flex items-center gap-1.5 shadow-sm text-xs font-bold"
+            >
+              <span>Preview Public Website</span>
+              <span className="text-[#D9A62E]">→</span>
+            </button>
+          </div>
+        </header>
+
+        <div className="flex-1">
+          <AdminDashboard
+            onBackToWebsite={() => {
+              setCurrentView('home');
+              window.location.hash = 'website';
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            onNavigateToService={handleSelectService}
+          />
+        </div>
       </div>
     );
   }
@@ -314,6 +387,23 @@ export default function App() {
         type={activePolicyModal}
         onClose={() => setActivePolicyModal(null)}
       />
+
+      {/* Quick Admin Dashboard Switcher Button */}
+      <div className="fixed bottom-5 right-5 z-40">
+        <button
+          id="floating-admin-dashboard-btn"
+          onClick={() => {
+            setCurrentView('admin');
+            window.location.hash = 'admin';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }}
+          className="flex items-center gap-2 px-4 py-2.5 rounded-full font-bold text-xs text-white bg-gradient-to-b from-[#063E38] to-[#031E1B] border-2 border-[#D9A62E] shadow-2xl hover:scale-105 transition-all cursor-pointer hover:border-[#ECCB77] group"
+          title="Open Admin Dashboard"
+        >
+          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+          <span>Admin Dashboard</span>
+        </button>
+      </div>
     </div>
   );
 }
